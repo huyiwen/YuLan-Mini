@@ -16,12 +16,15 @@
 
 <details><summary>3. 逐阶段的数据配比</summary>
 
+
+<details><summary>4. 逐阶段的数据配比</summary>
+
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
 </div>
 </details>
 
-<details><summary>4. 合成数据</summary>
+<details><summary>5. 合成数据</summary>
 
 数据清洗和合成流程：
 <div align=center>
@@ -29,7 +32,7 @@
 </div>
 </details>
 
-<details><summary>5. 中间阶段优化器状态</summary>
+<details><summary>6. 中间阶段优化器状态</summary>
 
 中间阶段优化器状态将在后续公布。
 </details>
