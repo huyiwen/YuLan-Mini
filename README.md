@@ -17,7 +17,7 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 
 ---
 
-#### 模型下载 🔗
+### 模型下载 🔗
 
 > 我们将在整理后上传模型权重
 
@@ -28,7 +28,7 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 
 ---
 
-#### 能力介绍 🌟
+### 能力介绍 🌟
 
 <div align=center>
 <img src="assets/main.png">
@@ -42,7 +42,7 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 
 ---
 
-#### 推理代码 💻
+### 推理代码 💻
 
 以下是使用 Huggingface 的简单推理代码示例：
 
@@ -65,7 +65,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-#### 预训练资源 🔧
+### 预训练资源 🔧
 
 为了提升研究的透明度和可复现性，我们将开源相关[预训练资源](https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain)：
 
@@ -104,11 +104,11 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-## 团队
+### 团队
 
 YuLan-Mini 由中国人民大学 [AI Box](http://aibox.ruc.edu.cn/) 团队开发。
 
-## 许可协议
+### 许可协议
 
 - 本仓库代码使用 [MIT License](./LICENSE)。
 - 关于模型权重、中间优化器状态和训练数据的使用政策将在后续公布。
