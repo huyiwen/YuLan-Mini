@@ -17,7 +17,7 @@
 <details><summary>3. 逐阶段的数据配比</summary>
 
 <div align=center>
-<img src="assets/data-preview.png">
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
 </div>
 </details>
 
@@ -25,7 +25,7 @@
 
 数据清洗和合成流程：
 <div align=center>
-<img src="assets/data-pipeline.png">
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
 </details>
 

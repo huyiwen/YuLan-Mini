@@ -1,6 +1,6 @@
 <h4 align="center">
     <p>
-        <b>中文</b> | <a href="">English</a>
+        <a href="https://github.com/RUC-GSAI/YuLan-Mini">中文</a> | <b>English</b>
     <p>
 </h4>
 
@@ -13,44 +13,45 @@
 <a><img src="https://img.shields.io/github/stars/RUC-GSAI/YuLan-Mini"></a>
 </div>
 
-YuLan-Mini is a lightweight language model with 2.42B parameters. Despite being pretrained on only 1.08T tokens, it achieves performance comparable to industry-leading models trained on larger datasets.
+YuLan-Mini is a lightweight language model with 2.42 billion parameters. It was pre-trained using only 1.08T tokens yet achieves performance comparable to industry-leading models trained with significantly more data. To facilitate reproducibility, we are open-sourcing the relevant pre-training resources.
 
 ---
 
-#### Model Download 🔗
+#### Model Downloads 🔗
+
+> Model weights will be uploaded after final preparations.
 
 |  Model  | Context Length |
-|--------|-------|
-|  [YuLan-Mini-2.4B](https://huggingface.co/rucaibox/YuLan-Mini-2.4B)  |  28K |
-|  [YuLan-Mini-2.4B-4k](https://huggingface.co/rucaibox/YuLan-Mini-2.4B-4K) |  4K |
+|---------|----------------|
+|  [YuLan-Mini-2.4B](https://huggingface.co/rucaibox/YuLan-Mini-2.4B) (Recommended)  |  28K |
+|  [YuLan-Mini-2.4B-4K](https://huggingface.co/rucaibox/YuLan-Mini-2.4B-4K)  |  4K |
 
 ---
 
-#### Capabilities 🌟
+#### Features 🌟
 
 <div align=center>
 <img src="assets/main.png">
 </div>
 
-Our pretraining approach improves training efficiency through three key innovations:
+Our pre-training methodology improves training efficiency through three key innovations:
 
-1. A refined data processing pipeline combining data cleaning with scheduling strategies;
-2. Robust optimization methods to mitigate training instability;
-3. An efficient annealing strategy integrating target data selection with long-context training.
+1. an elaborately designed **data pipeline** that combines data cleaning with data schedule strategies;
+2. a systematic **optimization method** that can effectively mitigate training instability;
+3. an effective **annealing approach** that integrate targeted data selection and long context training.
 
-To support reproducibility, we will open-source relevant pretraining resources.
 
 ---
 
 #### Inference Code 💻
 
-Below is a simple example of inference using Huggingface and vLLM:
+Below is a simple example for inference using Huggingface:
 
 **Huggingface Inference Example**
 ```python
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-# Load the model and tokenizer
+# Load model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("rucaibox/YuLan-Mini-2.4B")
 model = AutoModelForCausalLM.from_pretrained("rucaibox/YuLan-Mini-2.4B")
 
@@ -58,45 +59,45 @@ model = AutoModelForCausalLM.from_pretrained("rucaibox/YuLan-Mini-2.4B")
 input_text = "Renmin University of China is"
 inputs = tokenizer(input_text, return_tensors="pt")
 
-# Inference
+# Completion
 output = model.generate(inputs["input_ids"], max_new_tokens=100)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
 ```
 
 ---
 
-#### Pretraining Resources 🔧
+#### Pre-Training Resources 🔧
 
-To enhance research transparency and reproducibility, we will open-source the following [pretraining resources](https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain):
+To enhance research transparency and reproducibility, we are open-sourcing relevant [pre-training resources](https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain):
 
-<details><summary>1. Pretraining and Evaluation Code</summary>
+<details><summary>1. Pre-training and Evaluation Code</summary>
 
-The pretraining and evaluation code will be released later.
+The pre-training and evaluation code will be released in a future update.
 </details>
 
 <details><summary>2. Optimizer States Before Annealing</summary>
 
-Optimizer states before annealing will be released later.
+Optimizer states before annealing will be released in a future update.
 </details>
 
-<details><summary>3. Data Ratios for Each Stage</summary>
+<details><summary>3. Stage-wise Data Ratios</summary>
 
 <div align=center>
-<img src="assets/data-preview.png">
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
 </div>
 </details>
 
 <details><summary>4. Synthetic Data</summary>
 
-Data cleaning and synthesis process:
+Data cleaning and synthesis pipeline:
 <div align=center>
-<img src="assets/data-pipeline.png">
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
 </details>
 
 <details><summary>5. Intermediate Optimizer States</summary>
 
-Intermediate optimizer states will be released later.
+Intermediate optimizer states will be released in a future update.
 </details>
 
 ---
@@ -108,12 +109,12 @@ YuLan-Mini is developed by the [AI Box](http://aibox.ruc.edu.cn/) team at Renmin
 ## License
 
 - The code in this repository is released under the [MIT License](./LICENSE).
-- Policies for using model weights, intermediate optimizer states, and training data will be announced later.
-- Limitations: While we strive to minimize potential safety issues and encourage the generation of ethical and legally compliant text, as a probabilistic language model, unexpected outputs may still occur. For example, responses may contain bias, discrimination, or other harmful content. Please avoid spreading such content. We are not liable for any consequences resulting from the dissemination of harmful information.
+- Policies regarding the use of model weights, intermediate optimizer states, and training data will be announced in future updates.
+- Limitations: Despite our efforts to mitigate safety concerns and encourage the generation of ethical and lawful text, the probabilistic nature of language models may still lead to unexpected outputs. For instance, responses might contain bias, discrimination, or other harmful content. Please refrain from disseminating such content. We are not liable for any consequences arising from the spread of harmful information.
 
 ### Citation
 
-If you find YuLan-Mini helpful for your research or development, please cite the following paper:
+If you find YuLan-Mini helpful for your research or development, please cite [our technical report]():
 
 ```
 ```

@@ -1,6 +1,6 @@
 <h4 align="center">
     <p>
-        <b>中文</b> | <a href="">English</a>
+        <b>中文</b> | <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/README-en.md">English</a>
     <p>
 </h4>
 
@@ -13,15 +13,17 @@
 <a><img src="https://img.shields.io/github/stars/RUC-GSAI/YuLan-Mini"></a>
 </div>
 
-YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T Tokens 进行预训练，却达到了与使用更多数据的行业领先模型相媲美的性能。
+YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T Tokens 进行预训练，却达到了与使用更多数据的行业领先模型相媲美的性能。为方便复现，我们将开源相关预训练资源。
 
 ---
 
 #### 模型下载 🔗
 
+> 我们将在整理后上传模型权重
+
 |  模型  | 上下文长度 |
 |--------|-------|
-|  [YuLan-Mini-2.4B](https://huggingface.co/rucaibox/YuLan-Mini-2.4B)  |  28K |
+|  [YuLan-Mini-2.4B](https://huggingface.co/rucaibox/YuLan-Mini-2.4B)（推荐）  |  28K |
 |  [YuLan-Mini-2.4B-4k](https://huggingface.co/rucaibox/YuLan-Mini-2.4B-4K) |  4K |
 
 ---
@@ -34,18 +36,15 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 
 我们的预训练方法通过以下三项关键技术改进提升了训练效率：
 
-1. 精细的数据处理流程，将数据清洗与数据调度策略相结合；
-2. 稳健的优化方法，有效缓解训练中的不稳定性；
+1. 精细的数据处理流程，将数据清洗与数据课程策略相结合；
+2. 稳定的优化方法，有效缓解预训练中的不稳定性；
 3. 高效的退火策略，融合了目标数据选择和长上下文训练。
-
-
-值得注意的是，为方便复现，我们将开源相关预训练资源。
 
 ---
 
 #### 推理代码 💻
 
-以下是使用 Huggingface 和 vLLM 的简单推理代码示例：
+以下是使用 Huggingface 的简单推理代码示例：
 
 **Huggingface 推理示例**
 ```python
@@ -85,7 +84,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 <details><summary>3. 逐阶段的数据配比</summary>
 
 <div align=center>
-<img src="assets/data-preview.png">
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
 </div>
 </details>
 
@@ -93,7 +92,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 数据清洗和合成流程：
 <div align=center>
-<img src="assets/data-pipeline.png">
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
 </details>
 
@@ -117,7 +116,7 @@ YuLan-Mini 由中国人民大学 [AI Box](http://aibox.ruc.edu.cn/) 团队开发
 
 ### 引用
 
-如果您发现 YuLan-Mini 对您的研究或开发有帮助，请引用以下论文：
+如果您发现 YuLan-Mini 对您的研究或开发有帮助，请引用我们的[技术报告]()：
 
 ```
 ```
