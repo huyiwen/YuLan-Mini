@@ -14,8 +14,11 @@
 退火前优化器状态将在后续公布。
 </details>
 
-<details><summary>3. 逐阶段的数据配比</summary>
-
+<details><summary>3. 使用的开源数据集</summary>
+<div align=center>
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
+</div>
+</details>
 
 <details><summary>4. 逐阶段的数据配比</summary>
 
