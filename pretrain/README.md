@@ -27,7 +27,13 @@
 </div>
 </details>
 
-<details><summary>5. 合成数据</summary>
+<details><summary>5. 中间阶段检查点</summary>
+
+中间阶段检查点将在后续公布。
+</details>
+
+
+<details><summary>6. 合成数据</summary>
 
 数据清洗和合成流程：
 <div align=center>
@@ -35,7 +41,7 @@
 </div>
 </details>
 
-<details><summary>6. 中间阶段优化器状态</summary>
+<details><summary>7. 中间阶段优化器状态</summary>
 
 中间阶段优化器状态将在后续公布。
 </details>
