@@ -83,14 +83,21 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 退火前优化器状态将在后续公布。
 </details>
 
-<details><summary>3. 逐阶段的数据配比</summary>
+<details><summary>3. 使用的开源数据集</summary>
+<div >
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/used_datasets_list.md">Used Datasets List</a>
+</div>
+</details>
+
+
+<details><summary>4. 逐阶段的数据配比</summary>
 
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
 </div>
 </details>
 
-<details><summary>4. 合成数据</summary>
+<details><summary>5. 合成数据</summary>
 
 数据清洗和合成流程：
 <div align=center>
@@ -98,7 +105,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 </div>
 </details>
 
-<details><summary>5. 中间阶段优化器状态</summary>
+<details><summary>6. 中间阶段优化器状态</summary>
 
 中间阶段优化器状态将在后续公布。
 </details>
