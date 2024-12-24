@@ -85,7 +85,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 <details><summary>3. 使用的开源数据集</summary>
 <div >
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/used_datasets_list.md">Used Datasets List</a>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets-list.md">Used Datasets List</a>
 </div>
 </details>
 
