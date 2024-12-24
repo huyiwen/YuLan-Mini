@@ -31,7 +31,7 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 ### 能力介绍 🌟
 
 <div align=center>
-<img src="assets/main.png">
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/main.png">
 </div>
 
 我们的预训练方法通过以下三项关键技术改进提升了训练效率：
