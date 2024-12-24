@@ -8,28 +8,28 @@
 预训练和评测代码将在后续公布。
 </details>
 
+<details><summary>2. 中间阶段检查点</summary>
 
-<details><summary>2. 退火前优化器状态</summary>
+中间阶段检查点将在后续公布。
+</details>
+
+
+<details><summary>3. 退火前优化器状态</summary>
 
 退火前优化器状态将在后续公布。
 </details>
 
-<details><summary>3. 使用的开源数据集</summary>
+<details><summary>4. 使用的开源数据集</summary>
 <div >
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets-list.md">Used Datasets List</a>
 </div>
 </details>
 
-<details><summary>4. 逐阶段的数据配比</summary>
+<details><summary>5. 逐阶段的数据配比</summary>
 
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
 </div>
-</details>
-
-<details><summary>5. 中间阶段检查点</summary>
-
-中间阶段检查点将在后续公布。
 </details>
 
 
