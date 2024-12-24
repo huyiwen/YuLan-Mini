@@ -16,7 +16,7 @@
 
 <details><summary>3. 使用的开源数据集</summary>
 <div align=center>
-<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
+[Used Datasets List](https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/used_datasets_list.md)
 </div>
 </details>
 
