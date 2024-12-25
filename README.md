@@ -1,6 +1,6 @@
 <h4 align="center">
     <p>
-        <a href="https://github.com/RUC-GSAI/YuLan-Mini">中文</a> | <b>English</b>
+        <a href="https://github.com/RUC-GSAI/YuLan-Mini/edit/main/README_zh.md">中文</a> | <b>English</b>
     <p>
 </h4>
 
