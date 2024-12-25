@@ -106,9 +106,12 @@ Optimizer states before annealing will be released in a future update.
 
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">High-Definition Image</a>
 
-<div align=center>
-<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
-</div>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">
+  <div align=center>
+    <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
+  </div>
+</a>
+
 
 </details>
 
