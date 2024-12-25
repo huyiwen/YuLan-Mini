@@ -58,7 +58,7 @@ Our pre-training methodology improves training efficiency through three key inno
 |    YuLan-Mini    |    2.4B    |     1.08T      |      28K       |   37.80  |  68.46 |     64.00  |  65.90 |     57.18   |   44.57   |  51.48 |
 
 
-|      Models      | LAMBADA | MMLU  | CMMLU | CEval | Hella Swag | Wino Grande | Story Cloze | ARC-e | ARC-c |
+|      Models      | LAMBADA | MMLU  | CMMLU | CEval | HellaSwag | WinoGrande | StoryCloze | ARC-e | ARC-c |
 |:----------------:|:-------:|:-----:|:-----:|:-----:|:----------:|:-----------:|:-----------:|:-----:|:-----:|
 |   MiniCPM-2.6B   |  61.91  | 53.37 | 48.97 | 48.24 |   67.92    |     65.74   |     78.51   | 55.51 | 43.86 |
 |   Qwen2-1.5B     |  64.68  | 55.90 | 70.76 | 71.94 |   66.11    |     66.14   |     77.60   | 62.21 | 42.92 |
@@ -130,10 +130,10 @@ Optimizer states before annealing will be released in a future update.
 
 </details>
 
-<details><summary>5. 逐阶段的数据配比</summary>
+<details><summary>5. Data Distribution for every phase</summary>
 
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">数据配比高清图</a>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">High-Definition Image</a>
 
 </details>
 
@@ -154,10 +154,6 @@ Intermediate optimizer states will be released in a future update.
 
 
 ---
-
-## Team
-
-YuLan-Mini is developed by the [AI Box](http://aibox.ruc.edu.cn/) team at Renmin University of China.
 
 ## License
 
