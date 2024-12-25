@@ -118,10 +118,6 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ---
 
-### 团队
-
-YuLan-Mini 由中国人民大学 [AI Box](http://aibox.ruc.edu.cn/) 团队开发。
-
 ### 许可协议
 
 - 本仓库代码使用 [MIT License](./LICENSE)。
