@@ -17,7 +17,7 @@ YuLan-Mini is a lightweight language model with 2.42 billion parameters. It was 
 
 ---
 
-#### Model Downloads 🔗
+## Model Downloads 🔗
 
 > Model weights will be uploaded after final preparations.
 
@@ -28,7 +28,7 @@ YuLan-Mini is a lightweight language model with 2.42 billion parameters. It was 
 
 ---
 
-#### Features 🌟
+## Features 🌟
 
 <div align=center>
 <img src="assets/main.png">
@@ -42,7 +42,7 @@ Our pre-training methodology improves training efficiency through three key inno
 
 
 ---
-#### Behchmarks 🌟
+## Behchmarks 🌟
 
 |      Models      | Model Size | # Train Tokens | Context Length | MATH 500 | GSM 8K | Human Eval | MBPP   | RACE Middle | RACE High | RULER  |
 |:----------------|----------:|--------------:|--------------:|:--------|:------|:----------|:------|:-----------|:---------|:------|
@@ -74,7 +74,7 @@ Our pre-training methodology improves training efficiency through three key inno
 
 ---
 
-#### Pre-Training Resources 🔧
+## Pre-Training Resources 🔧
 
 To enhance research transparency and reproducibility, we are open-sourcing relevant [pre-training resources](https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain):
 
@@ -130,7 +130,7 @@ Intermediate optimizer states will be released in a future update.
 
 ---
 
-#### Inference Code 💻
+## Quick Start 💻
 
 Below is a simple example for inference using Huggingface:
 
@@ -161,7 +161,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 - Policies regarding the use of model weights, intermediate optimizer states, and training data will be announced in future updates.
 - Limitations: Despite our efforts to mitigate safety concerns and encourage the generation of ethical and lawful text, the probabilistic nature of language models may still lead to unexpected outputs. For instance, responses might contain bias, discrimination, or other harmful content. Please refrain from disseminating such content. We are not liable for any consequences arising from the spread of harmful information.
 
-### Citation
+## Citation
 
 If you find YuLan-Mini helpful for your research or development, please cite [our technical report](https://arxiv.org/abs/2412.17743):
 
