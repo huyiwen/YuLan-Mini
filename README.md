@@ -45,29 +45,29 @@ Our pre-training methodology improves training efficiency through three key inno
 #### Behchmarks 🌟
 
 |      Models      | Model Size | # Train Tokens | Context Length | MATH 500 | GSM 8K | Human Eval | MBPP   | RACE Middle | RACE High | RULER  |
-|:----------------:|:----------:|:--------------:|:--------------:|:--------:|:------:|:----------:|:------:|:-----------:|:---------:|:------:|
+|:----------------|----------:|--------------:|--------------:|:--------|:------|:----------|:------|:-----------|:---------|:------|
 |     MiniCPM      |    2.6B    |     1.06T      |       4K       |   15.00  |  53.83 |     50.00* |  47.31 |     56.61   |   44.27   |   N/A  |
 |      Qwen-2      |    1.5B    |       7T       |      128K      |   22.60  | 46.90* |     34.80* | 46.90* |     55.77   |   43.69   |  60.16 |
 |     Qwen2.5      |    0.5B    |      18T       |      128K      |   23.60  | 41.60* |     30.50* | 39.30* |     52.36   |   40.31   |  49.23 |
-|     Qwen2.5      |    1.5B    |      18T       |      128K      |   45.40  | 68.50* |     37.20* | 60.20* |     58.77   |   44.33   |  68.26 |
+|     Qwen2.5      |    1.5B    |      18T       |      128K      |   **45.40**  | **68.50\*** |     37.20* | 60.20* |     **58.77**   |   44.33   |  <ins>68.26</ins> |
 |     Gemma2       |    2.6B    |       2T       |       8K       |   18.30* | 30.30* |     19.50* | 42.10* |       -     |      -    |   N/A  |
-|    StableLM2     |    1.7B    |       2T       |       4K       |     -    |  20.62 |      8.50* |  17.50 |     56.33   |   45.06   |   N/A  |
+|    StableLM2     |    1.7B    |       2T       |       4K       |     -    |  20.62 |      8.50* |  17.50 |     56.33   |   **45.06**   |   N/A  |
 |    SmolLM2       |    1.7B    |      11T       |       8K       |   11.80  |    -   |     23.35  |  45.00 |     55.77   |   43.06   |   N/A  |
-|    Llama3.2      |    3.2B    |       9T       |      128K      |    7.40  |    -   |     29.30  |  49.70 |     55.29   |   43.34   |  77.06 |
-|    YuLan-Mini    |    2.4B    |     1.04T      |       4K       |   32.60  |  66.65 |     61.60  |  66.70 |     55.71   |   43.58   |   N/A  |
-|    YuLan-Mini    |    2.4B    |     1.08T      |      28K       |   37.80  |  68.46 |     64.00  |  65.90 |     57.18   |   44.57   |  51.48 |
+|    Llama3.2      |    3.2B    |       9T       |      128K      |    7.40  |    -   |     29.30  |  49.70 |     55.29   |   43.34   |  **77.06** |
+|    YuLan-Mini    |    2.4B    |     1.04T      |       4K       |   32.60  |  66.65 |     <ins>61.60</ins>  |  **66.70** |     55.71   |   43.58   |   N/A  |
+|    YuLan-Mini    |    2.4B    |     1.08T      |      28K       |  <ins>37.80</ins>  |  <ins>68.46</ins> |    **64.00**  |  <ins>65.90</ins>|     <ins>57.18</ins>   |   <ins>44.57</ins>   |  51.48 |
 
 
 |      Models      | LAMBADA | MMLU  | CMMLU | CEval | HellaSwag | WinoGrande | StoryCloze | ARC-e | ARC-c |
-|:----------------:|:-------:|:-----:|:-----:|:-----:|:----------:|:-----------:|:-----------:|:-----:|:-----:|
+|:----------------|:-------|:-----|:-----|:-----|:----------|:-----------|:-----------|:-----|:-----|
 |   MiniCPM-2.6B   |  61.91  | 53.37 | 48.97 | 48.24 |   67.92    |     65.74   |     78.51   | 55.51 | 43.86 |
-|   Qwen2-1.5B     |  64.68  | 55.90 | 70.76 | 71.94 |   66.11    |     66.14   |     77.60   | 62.21 | 42.92 |
+|   Qwen2-1.5B     |  64.68  | 55.90 | **70.76** | **71.94** |   66.11    |     66.14   |     77.60   | 62.21 | 42.92 |
 |  Qwen2.5-0.5B    |  52.00  | 47.50 | 52.17 | 54.27 |   50.54    |     55.88   |     71.67   | 56.10 | 39.51 |
-|  Qwen2.5-1.5B    |  62.12  | 60.71 | 67.82 | 69.05 |   67.18    |     64.48   |     76.80   | 71.51 | 53.41 |
-|   Gemma2-2.6B    |    -    | 52.20*|   -   | 28.00*|   74.60*   |    71.50*   |       -     |   -   | 55.70*|
-| StableLM2-1.7B   |  66.15  | 40.37 | 29.29 | 26.99 |   69.79    |     64.64   |     78.56   | 54.00 | 40.78 |
-|  SmolLM2-1.7B    |  67.42  | 51.91 | 33.46 | 35.10 |   72.96    |     67.40   |     79.32   | 44.82 | 35.49 |
-|   Llama3.2-3B    |  69.08  | 63.40 | 44.44 | 44.49 |   75.62    |     67.48   |     76.80   | 70.12 | 48.81 |
+|  Qwen2.5-1.5B    |  62.12  | <ins>60.71</ins> | <ins>67.82</ins> | <ins>69.05</ins> |   67.18    |     64.48   |     76.80   | **71.51** | <ins>53.41</ins> |
+|   Gemma2-2.6B    |    -    | 52.20*|   -   | 28.00*|   <ins>74.60*</ins>   |    **71.50\***   |       -     |   -   | **55.70\***|
+| StableLM2-1.7B   |  66.15  | 40.37 | 29.29 | 26.99 |   69.79    |     64.64   |     <ins>78.56</ins>   | 54.00 | 40.78 |
+|  SmolLM2-1.7B    |  <ins>67.42</ins>  | 51.91 | 33.46 | 35.10 |   72.96    |     67.40   |     **79.32**   | 44.82 | 35.49 |
+|   Llama3.2-3B    |  **69.08**  | **63.40** | 44.44 | 44.49 |   **75.62**    |     <ins>67.48</ins>   |     76.80   | <ins>70.12</ins> | 48.81 |
 |    YuLan-Mini    |  64.72  | 51.79 | 48.35 | 51.47 |   68.65    |     67.09   |     76.37   | 69.87 | 50.51 |
 |    YuLan-Mini    |  65.67  | 49.10 | 45.45 | 48.23 |   67.22    |     67.24   |     75.89   | 67.47 | 49.32 |
 
@@ -95,14 +95,8 @@ The intermediate stage checkpoints will be released in a future update.
 Optimizer states before annealing will be released in a future update.
 </details>
 
-<details><summary>3. Stage-wise Data Ratios</summary>
 
-<div align=center>
-<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
-</div>
-</details>
-
-<details><summary>4. The Open-Source Datasets /summary>
+<details><summary>4. The Used Open-Source Datasets </summary>
 
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets-list.md">Used-Datasets-List</a>
 
@@ -111,6 +105,10 @@ Optimizer states before annealing will be released in a future update.
 <details><summary>5. Data Distribution for every phase</summary>
 
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">High-Definition Image</a>
+
+<div align=center>
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
+</div>
 
 </details>
 
