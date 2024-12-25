@@ -71,28 +71,6 @@ Our pre-training methodology improves training efficiency through three key inno
 |    YuLan-Mini    |  64.72  | 51.79 | 48.35 | 51.47 |   68.65    |     67.09   |     76.37   | 69.87 | 50.51 |
 |    YuLan-Mini    |  65.67  | 49.10 | 45.45 | 48.23 |   67.22    |     67.24   |     75.89   | 67.47 | 49.32 |
 
----
-
-#### Inference Code 💻
-
-Below is a simple example for inference using Huggingface:
-
-**Huggingface Inference Example**
-```python
-from transformers import AutoTokenizer, AutoModelForCausalLM
-
-# Load model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("rucaibox/YuLan-Mini-2.4B")
-model = AutoModelForCausalLM.from_pretrained("rucaibox/YuLan-Mini-2.4B")
-
-# Input text
-input_text = "Renmin University of China is"
-inputs = tokenizer(input_text, return_tensors="pt")
-
-# Completion
-output = model.generate(inputs["input_ids"], max_new_tokens=100)
-print(tokenizer.decode(output[0], skip_special_tokens=True))
-```
 
 ---
 
@@ -132,7 +110,6 @@ Optimizer states before annealing will be released in a future update.
 
 <details><summary>5. Data Distribution for every phase</summary>
 
-
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">High-Definition Image</a>
 
 </details>
@@ -150,6 +127,28 @@ Data cleaning and synthesis pipeline:
 Intermediate optimizer states will be released in a future update.
 </details>
 
+---
+
+#### Inference Code 💻
+
+Below is a simple example for inference using Huggingface:
+
+**Huggingface Inference Example**
+```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+# Load model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained("rucaibox/YuLan-Mini-2.4B")
+model = AutoModelForCausalLM.from_pretrained("rucaibox/YuLan-Mini-2.4B")
+
+# Input text
+input_text = "Renmin University of China is"
+inputs = tokenizer(input_text, return_tensors="pt")
+
+# Completion
+output = model.generate(inputs["input_ids"], max_new_tokens=100)
+print(tokenizer.decode(output[0], skip_special_tokens=True))
+```
 
 
 
