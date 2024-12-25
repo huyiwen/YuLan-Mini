@@ -86,7 +86,7 @@ The pre-training and evaluation code will be released in a future update.
 
 
 <details><summary>2. Intermediate Stage Checkpoints</summary>
-The intermediate stage checkpoints will be released in a future update.
+The intermediate stage checkpoints are released in <a href="https://huggingface.co/datasets/yulan-team/YuLan-Mini">YuLan-Mini</a>.
 
 </details>
 
@@ -118,6 +118,9 @@ Data cleaning and synthesis pipeline:
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
+
+The synthetic data we are using is released in <a href="https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets">YuLan-Mini-Datasets</a>
+
 </details>
 
 <details><summary>7. Intermediate Optimizer States</summary>
