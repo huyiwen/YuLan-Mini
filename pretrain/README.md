@@ -20,16 +20,16 @@
 </details>
 
 <details><summary>4. 使用的开源数据集</summary>
-<div >
+
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets-list.md">Used Datasets List</a>
-</div>
+
 </details>
 
 <details><summary>5. 逐阶段的数据配比</summary>
 
-<div align=center>
-<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-preview.png">
-</div>
+
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">数据配比高清图</a>
+
 </details>
 
 
