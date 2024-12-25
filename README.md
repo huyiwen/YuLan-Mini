@@ -128,13 +128,16 @@ YuLan-Mini 由中国人民大学 [AI Box](http://aibox.ruc.edu.cn/) 团队开发
 如果您发现 YuLan-Mini 对您的研究或开发有帮助，请引用我们的[技术报告](https://arxiv.org/abs/2412.17743)：
 
 ```
-@misc{hu2024yulanmini,
+@article{hu2024yulanmini,
       title={YuLan-Mini: An Open Data-efficient Language Model}, 
       author={Yiwen Hu and Huatong Song and Jia Deng and Jiapeng Wang and Jie Chen and Kun Zhou and Yutao Zhu and Jinhao Jiang and Zican Dong and Wayne Xin Zhao and Ji-Rong Wen},
-      year={2024},
-      eprint={2412.17743},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2412.17743}, 
+      url={https://arxiv.org/abs/2412.17743},
+      journal      = {CoRR},
+      volume       = {abs/2412.17743},
+      year         = {2024},
+      url          = {https://doi.org/10.48550/arXiv.2412.17743},
+      doi          = {10.48550/ARXIV.2412.17743},
+      eprinttype   = {arXiv},
+      eprint       = {2412.17743}
 }
 ```
