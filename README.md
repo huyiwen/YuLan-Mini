@@ -105,14 +105,11 @@ Optimizer states before annealing will be released in a future update.
 
 <details><summary>5. Data Distribution for every phase</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">High-Definition Image</a>
-
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">
   <div align=center>
-    <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
+    <img src="assets/data_distribution_for_every_phase.png">
   </div>
 </a>
-
 
 </details>
 
@@ -131,6 +128,15 @@ The synthetic data we are using is released in <a href="https://huggingface.co/c
 
 Intermediate optimizer states will be released in a future update.
 </details>
+
+
+### What you can do with these pre-training resources
+
+1. **Pre-train** your own LLM. You can use our data and curriculum to train a model that's just as powerful as YuLan-Mini.
+2. Perform your own **learning rate annealing**. During the annealing phase, YuLan-Mini's learning ability is at its peak. You can resume training from the checkpoint before annealing and use your own dataset for learning rate annealing.
+3. **Fine-tune** the Instruct version of the LLM. You can use the YuLan-Mini base model to train your own Instruct version.
+4. **Training dynamics** research. You can use YuLan-Mini's intermediate checkpoints to explore internal changes during the pre-training process.
+5. **Synthesize** your own data. You can use YuLan-Mini's data pipeline to clean and generate your own dataset.
 
 ---
 
@@ -156,9 +162,21 @@ output = model.generate(inputs["input_ids"], max_new_tokens=100)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
 ```
 
+**vLLM Serve Example**
+```bash
+vllm serve yulan-team/YuLan-Mini --dtype bfloat16
+```
 
+**SGLang Serve Example**
+```bash
+python -m sglang.launch_server --model-path yulan-team/YuLan-Mini --port 30000 --host 0.0.0.0
+```
 
 ---
+
+## The Team
+
+YuLan-Mini is developed and maintained by [AI Box, Renmin University of China](http://aibox.ruc.edu.cn/).
 
 ## License
 
