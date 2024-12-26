@@ -9,11 +9,11 @@
 <h1>YuLan-Mini: An Open Data-efficient Language Model</h1>
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue" alt="license"></a>
 <a href="https://arxiv.org/abs/2412.17743" target="_blank"><img src=https://img.shields.io/badge/arXiv-b5212f.svg?logo=arxiv></a>
-<a href="https://huggingface.co/yulan-team/YuLan-Mini"><img alt="Static Badge" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue?color=8A2BE2"></a>
+<a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3"><img alt="Static Badge" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue?color=8A2BE2"></a>
 <a><img src="https://img.shields.io/github/stars/RUC-GSAI/YuLan-Mini"></a>
 </div>
 
-YuLan-Mini is a lightweight language model with 2.42 billion parameters. **It is a base model.** It was pre-trained using only 1.08T tokens yet achieves performance comparable to industry-leading models trained with significantly more data. To facilitate reproducibility, we are open-sourcing the relevant pre-training resources.
+YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achieves performance comparable to industry-leading models trained on significantly more data, despite being pre-trained on only 1.08T tokens. The model excels particularly in the domains of **mathematics** and **code**. To facilitate reproducibility, we will open-source the relevant pre-training resources.
 
 ---
 
@@ -21,10 +21,11 @@ YuLan-Mini is a lightweight language model with 2.42 billion parameters. **It is
 
 > Model weights will be uploaded after final preparations.
 
-|  Model  | Context Length |
-|---------|----------------|
-|  [YuLan-Mini-2.4B](https://huggingface.co/rucaibox/YuLan-Mini-2.4B) (Recommended)  |  28K |
-|  [YuLan-Mini-2.4B-4K](https://huggingface.co/rucaibox/YuLan-Mini-2.4B-4K)  |  4K |
+|  Model  | Context Length | SFT |
+|---------|----------------|-----|
+| [YuLan-Mini](https://huggingface.co/yulan-team/YuLan-Mini) (Recommended) | 28K | ❎ |
+| [YuLan-Mini-2.4B-4K](https://huggingface.co/yulan-team/YuLan-Mini-Intermediate-4K) | 4K | ❎ |
+| YuLan-Mini-Instruct | Comming soon | ✅ |
 
 ---
 
@@ -86,7 +87,7 @@ The pre-training and evaluation code will be released in a future update.
 
 
 <details><summary>2. Intermediate Stage Checkpoints</summary>
-The intermediate stage checkpoints are released in <a href="https://huggingface.co/datasets/yulan-team/YuLan-Mini">YuLan-Mini</a>.
+The intermediate stage checkpoints are released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini</a>.
 
 </details>
 
@@ -122,7 +123,7 @@ Data cleaning and synthesis pipeline:
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
 
-The synthetic data we are using is released in <a href="https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets">YuLan-Mini-Datasets</a>
+The synthetic data we are using is released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini-Datasets</a>
 
 </details>
 
@@ -139,11 +140,12 @@ Below is a simple example for inference using Huggingface:
 
 **Huggingface Inference Example**
 ```python
+import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # Load model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("rucaibox/YuLan-Mini-2.4B")
-model = AutoModelForCausalLM.from_pretrained("rucaibox/YuLan-Mini-2.4B")
+tokenizer = AutoTokenizer.from_pretrained("yulan-team/YuLan-Mini")
+model = AutoModelForCausalLM.from_pretrained("yulan-team/YuLan-Mini", torch_dtype=torch.bfloat16)
 
 # Input text
 input_text = "Renmin University of China is"
