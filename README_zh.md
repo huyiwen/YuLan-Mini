@@ -9,7 +9,7 @@
 <h1>YuLan-Mini: 数据高效的开源语言模型</h1>
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue" alt="license"></a>
 <a href="https://arxiv.org/abs/2412.17743" target="_blank"><img src=https://img.shields.io/badge/arXiv-b5212f.svg?logo=arxiv></a>
-<a href="https://huggingface.co/rucaibox"><img alt="Static Badge" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue?color=8A2BE2"></a>
+<a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3"><img alt="Static Badge" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue?color=8A2BE2"></a>
 <a><img src="https://img.shields.io/github/stars/RUC-GSAI/YuLan-Mini"></a>
 </div>
 
@@ -23,8 +23,8 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 
 |  模型  | 上下文长度 |
 |--------|-------|
-|  [YuLan-Mini-2.4B](https://huggingface.co/rucaibox/YuLan-Mini-2.4B)（推荐）  |  28K |
-|  [YuLan-Mini-2.4B-4k](https://huggingface.co/rucaibox/YuLan-Mini-2.4B-4K) |  4K |
+|  [YuLan-Mini-2.4B](https://huggingface.co/yulan-team/YuLan-Mini)（推荐）  |  28K |
+|  [YuLan-Mini-2.4B-4k](https://huggingface.co/yulan-team/YuLan-Mini-Intermediate-4K) |  4K |
 
 ---
 
@@ -86,7 +86,7 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 
 <details><summary>2. 中间阶段检查点</summary>
 
-中间阶段的检查点发布在 <a href="https://huggingface.co/datasets/yulan-team/YuLan-Mini">YuLan-Mini</a>。
+中间阶段的检查点发布在 <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini</a>。
 </details>
 
 
@@ -118,7 +118,7 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
 
-我们所使用的合成数据发布在 <a href="https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets">YuLan-Mini-Datasets</a>
+我们所使用的合成数据发布在 <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini-Datasets</a>
 
 </details>
 <details><summary>7. 中间阶段优化器状态</summary>
@@ -136,11 +136,12 @@ YuLan-Mini 是一个 2.42B 参数量的轻量化语言模型。仅使用 1.08T T
 
 **Huggingface 推理示例**
 ```python
+import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # 加载模型和分词器
-tokenizer = AutoTokenizer.from_pretrained("rucaibox/YuLan-Mini-2.4B")
-model = AutoModelForCausalLM.from_pretrained("rucaibox/YuLan-Mini-2.4B")
+tokenizer = AutoTokenizer.from_pretrained("yulan-team/YuLan-Mini")
+model = AutoModelForCausalLM.from_pretrained("yulan-team/YuLan-Mini", torch_dtype=torch.bfloat16)
 
 # 输入文本
 input_text = "Renmin University of China is"
