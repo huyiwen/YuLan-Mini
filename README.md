@@ -93,7 +93,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <details><summary>3. Optimizer States Before Annealing</summary>
 
-Optimizer states before annealing will be released in a future update.
+<a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">YuLan-Mini-Before-Annealing</a>
 </details>
 
 
@@ -132,11 +132,11 @@ Intermediate optimizer states will be released in a future update.
 
 ### What you can do with these pre-training resources
 
-1. **Pre-train** your own LLM. You can use our data and curriculum to train a model that's just as powerful as YuLan-Mini.
-2. Perform your own **learning rate annealing**. During the annealing phase, YuLan-Mini's learning ability is at its peak. You can resume training from the checkpoint before annealing and use your own dataset for learning rate annealing.
+1. **Pre-train** your own LLM. You can use [our data](https://huggingface.co/yulan-team/YuLan-Mini-Datasets) and curriculum to train a model that's just as powerful as YuLan-Mini.
+2. Perform your own **learning rate annealing**. During the annealing phase, YuLan-Mini's learning ability is at its peak. You can resume training from [the checkpoint before annealing](https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing) and use your own dataset for learning rate annealing.
 3. **Fine-tune** the Instruct version of the LLM. You can use the YuLan-Mini base model to train your own Instruct version.
 4. **Training dynamics** research. You can use YuLan-Mini's intermediate checkpoints to explore internal changes during the pre-training process.
-5. **Synthesize** your own data. You can use YuLan-Mini's data pipeline to clean and generate your own dataset.
+5. **Synthesize** your own data. You can use YuLan-Mini's [data pipeline](https://github.com/RUC-GSAI/YuLan-Mini) to clean and generate your own dataset.
 
 ---
 
