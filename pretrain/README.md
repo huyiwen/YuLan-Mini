@@ -20,20 +20,20 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
             <th>4K Context</th>
             <th>28K Context</th>
             <th>Optimizer</th>
-            <th>Inference Arch</th>
-            <th>LAMBADA `Acc`</th>
-            <th>GSM8K `Acc`</th>
-            <th>HumanEval `pass@1`</th>
+            <th>Inference Architecture</th>
+            <th>LAMBADA <code>Acc</code></th>
+            <th>GSM8K <code>Acc</code></th>
+            <th>HumanEval <code>pass@1</code></th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>Stable</td>
             <td>5</td>
-            <td>[YuLan-Mini-Phase5](https://huggingface.co/yulan-team/YuLan-Mini-Phase5)</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase5">YuLan-Mini-Phase5</a></td>
             <td></td>
             <td></td>
-            <td>`yulanmini`</td>
+            <td><code>yulanmini</code></td>
             <td>53.85</td>
             <td>3.41</td>
             <td>12.26</td>
@@ -41,10 +41,10 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
         <tr>
             <td>Stable</td>
             <td>10</td>
-            <td>[YuLan-Mini-Phase10](https://huggingface.co/yulan-team/YuLan-Mini-Phase10)</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase10">YuLan-Mini-Phase10</a></td>
             <td></td>
             <td></td>
-            <td>`yulanmini`</td>
+            <td><code>yulanmini</code></td>
             <td>55.00</td>
             <td>9.57</td>
             <td>15.95</td>
@@ -52,10 +52,10 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
         <tr>
             <td>Stable</td>
             <td>15</td>
-            <td>[YuLan-Mini-Phase15](https://huggingface.co/yulan-team/YuLan-Mini-Phase15)</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase15">YuLan-Mini-Phase15</a></td>
             <td></td>
             <td></td>
-            <td>`yulanmini`</td>
+            <td><code>yulanmini</code></td>
             <td>55.81</td>
             <td>13.81</td>
             <td>16.99</td>
@@ -63,10 +63,10 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
         <tr>
             <td>Stable</td>
             <td>20</td>
-            <td>[YuLan-Mini-Phase20](https://huggingface.co/yulan-team/YuLan-Mini-Phase20)</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase20">YuLan-Mini-Phase20</a></td>
             <td></td>
             <td>✅</td>
-            <td>`yulanmini`</td>
+            <td><code>yulanmini</code></td>
             <td>55.81</td>
             <td>21.39</td>
             <td>20.79</td>
@@ -74,10 +74,10 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
         <tr>
             <td>Stable</td>
             <td>25 (1T tokens)</td>
-            <td>[YuLan-Mini-Before-Annealing](https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing)</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase25">YuLan-Mini-Phase25</a></td>
             <td></td>
             <td>✅</td>
-            <td>`yulanmini`</td>
+            <td><code>yulanmini</code></td>
             <td>55.67</td>
             <td>29.94</td>
             <td>34.06</td>
@@ -99,7 +99,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
             <td>YuLan-Mini-4K</td>
             <td></td>
             <td></td>
-            <td>`llama`\*</td>
+            <td><code>llama</code>*</td>
             <td>64.72</td>
             <td>66.65</td>
             <td>61.60</td>
@@ -108,15 +108,17 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
             <td>Annealing</td>
             <td>27</td>
             <td></td>
-            <td>[YuLan-Mini](https://huggingface.co/yulan-team/YuLan-Mini)</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini">YuLan-Mini</a></td>
             <td></td>
-            <td>`llama`\*</td>
+            <td><code>llama</code>*</td>
             <td>65.67</td>
             <td>68.46</td>
             <td>64.00</td>
         </tr>
     </tbody>
 </table>
+
+\*: For easier inference and deployment, we merged the re-parameterized added parameters and scaling factors into the final released models ([**YuLan-Mini**](https://huggingface.co/yulan-team/YuLan-Mini) and **YuLan-Mini-Intermediate-4K**), enabling it to run on the Llama architecture. However, these parameters are still retained in the intermediate checkpoints from the training process.
 
 </details>
 
