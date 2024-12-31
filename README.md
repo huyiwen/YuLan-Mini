@@ -151,7 +151,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
         <tr>
             <td>Stable</td>
             <td>25 (1T tokens)</td>
-            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase25">YuLan-Mini-Phase25</a></td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">YuLan-Mini-Before-Annealing</a></td>
             <td></td>
             <td>✅</td>
             <td><code>yulanmini</code></td>
