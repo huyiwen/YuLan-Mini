@@ -180,7 +180,7 @@ YuLan-Mini is developed and maintained by [AI Box, Renmin University of China](h
 
 ## License
 
-- The code in this repository is released under the [MIT License](./LICENSE).
+- The code in this repository, the model weights, and optimizer states are released under the [MIT License](./LICENSE).
 - Policies regarding the use of model weights, intermediate optimizer states, and training data will be announced in future updates.
 - Limitations: Despite our efforts to mitigate safety concerns and encourage the generation of ethical and lawful text, the probabilistic nature of language models may still lead to unexpected outputs. For instance, responses might contain bias, discrimination, or other harmful content. Please refrain from disseminating such content. We are not liable for any consequences arising from the spread of harmful information.
 
