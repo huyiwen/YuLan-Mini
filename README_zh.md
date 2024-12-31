@@ -97,14 +97,14 @@ YuLan-Mini 是一个 2.4B 参数量的轻量化语言模型。仅使用 1.08T To
 
 <details><summary>4. 使用的开源数据集</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets-list.md">使用的开源数据集</a>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets">使用的开源数据集</a>
 
 </details>
 
 <details><summary>5. 逐阶段的数据配比</summary>
 
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">数据配比高清图</a>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">数据配比高清图</a>
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
 </div>

@@ -96,13 +96,13 @@ YuLan-Miniは2.4Bパラメータの軽量な言語モデルです。1.08Tトー�
 
 <details><summary>4. 使用したオープンソースデータセット</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets-list.md">使用データセットリスト</a>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets">使用データセットリスト</a>
 
 </details>
 
 <details><summary>5. 各フェーズのデータ分布</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">
   <div align=center>
     <img src="assets/data_distribution_for_every_phase.png">
   </div>

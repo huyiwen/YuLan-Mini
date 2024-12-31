@@ -99,13 +99,13 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <details><summary>4. The Used Open-Source Datasets </summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets-list.md">Used-Datasets-List</a>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets">Used-Datasets-List</a>
 
 </details>
 
 <details><summary>5. Data Distribution for every phase</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/final.pdf">
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">
   <div align=center>
     <img src="assets/data_distribution_for_every_phase.png">
   </div>
