@@ -19,12 +19,11 @@ YuLan-Mini 是一个 2.4B 参数量的轻量化语言模型。仅使用 1.08T To
 
 ## 模型下载 🔗
 
-> 我们将在整理后上传模型权重
-
-|  模型  | 上下文长度 |
-|--------|-------|
-|  [YuLan-Mini-2.4B](https://huggingface.co/yulan-team/YuLan-Mini)（推荐）  |  28K |
-|  [YuLan-Mini-2.4B-4k](https://huggingface.co/yulan-team/YuLan-Mini-Intermediate-4K) |  4K |
+|  Model  | Context Length | SFT | 🤗 Hugging Face | Wise Model |
+|---------|----------------|-----|-----------------|------------|
+| YuLan-Mini (Recommended) | 28K | ❎ | [`YuLan-Mini`](https://huggingface.co/yulan-team/YuLan-Mini) | [`YuLan-Mini`](https://wisemodel.cn/models/yulan-team/YuLan-Mini) |
+| YuLan-Mini-2.4B-4K | 4K | ❎ | | |
+| YuLan-Mini-Instruct | Comming soon | ✅ | | |
 
 ---
 
@@ -167,7 +166,7 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 
 ```BibTex
 @article{yulanmini,
-      title        = {YuLan-Mini: An Open Data-efficient Language Model}, 
+      title        = {YuLan-Mini: An Open Data-efficient Language Model},
       author       = {Yiwen Hu and
                       Huatong Song and
                       Jia Deng and

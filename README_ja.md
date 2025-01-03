@@ -19,12 +19,11 @@ YuLan-Miniは2.4Bパラメータの軽量な言語モデルです。1.08Tトー�
 
 ## モデルのダウンロード 🔗
 
-> モデルの重みは最終準備が整い次第アップロードされます。
-
-|  モデル  | コンテキスト長 |
-|---------|----------------|
-| [YuLan-Mini](https://huggingface.co/yulan-team/YuLan-Mini)（推奨） | 28K |
-| [YuLan-Mini-2.4B-4K](https://huggingface.co/yulan-team/YuLan-Mini-Intermediate-4K) | 4K |
+|  Model  | Context Length | SFT | 🤗 Hugging Face | Wise Model |
+|---------|----------------|-----|-----------------|------------|
+| YuLan-Mini (Recommended) | 28K | ❎ | [`YuLan-Mini`](https://huggingface.co/yulan-team/YuLan-Mini) | [`YuLan-Mini`](https://wisemodel.cn/models/yulan-team/YuLan-Mini) |
+| YuLan-Mini-2.4B-4K | 4K | ❎ | | |
+| YuLan-Mini-Instruct | Comming soon | ✅ | | |
 
 ---
 
@@ -187,12 +186,12 @@ YuLan-Miniが研究や開発に役立つ場合は、[技術報告書](https://ar
 
 ```
 @misc{hu2024yulanmini,
-      title={YuLan-Mini: An Open Data-efficient Language Model}, 
+      title={YuLan-Mini: An Open Data-efficient Language Model},
       author={Yiwen Hu and Huatong Song and Jia Deng and Jiapeng Wang and Jie Chen and Kun Zhou and Yutao Zhu and Jinhao Jiang and Zican Dong and Wayne Xin Zhao and Ji-Rong Wen},
       year={2024},
       eprint={2412.17743},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2412.17743}, 
+      url={https://arxiv.org/abs/2412.17743},
 }
 ```

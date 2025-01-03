@@ -45,32 +45,34 @@ Our pre-training methodology improves training efficiency through three key inno
 ---
 ## Behchmarks 🌟
 
+> Note: The model size calculation includes the embedding size.
+
 |      Models      | Model Size | # Train Tokens | Context Length | MATH 500 | GSM 8K | Human Eval | MBPP   | RACE Middle | RACE High | RULER  |
 |:----------------|----------:|--------------:|--------------:|:--------|:------|:----------|:------|:-----------|:---------|:------|
-|     MiniCPM      |    2.6B    |     1.06T      |       4K       |   15.00  |  53.83 |     50.00* |  47.31 |     56.61   |   44.27   |   N/A  |
-|      Qwen-2      |    1.5B    |       7T       |      128K      |   22.60  | 46.90* |     34.80* | 46.90* |     55.77   |   43.69   |  60.16 |
-|     Qwen2.5      |    0.5B    |      18T       |      128K      |   23.60  | 41.60* |     30.50* | 39.30* |     52.36   |   40.31   |  49.23 |
-|     Qwen2.5      |    1.5B    |      18T       |      128K      |   **45.40**  | **68.50\*** |     37.20* | 60.20* |     **58.77**   |   44.33   |  <ins>68.26</ins> |
-|     Gemma2       |    2.6B    |       2T       |       8K       |   18.30* | 30.30* |     19.50* | 42.10* |       -     |      -    |   N/A  |
-|    StableLM2     |    1.7B    |       2T       |       4K       |     -    |  20.62 |      8.50* |  17.50 |     56.33   |   **45.06**   |   N/A  |
-|    SmolLM2       |    1.7B    |      11T       |       8K       |   11.80  |    -   |     23.35  |  45.00 |     55.77   |   43.06   |   N/A  |
-|    Llama3.2      |    3.2B    |       9T       |      128K      |    7.40  |    -   |     29.30  |  49.70 |     55.29   |   43.34   |  **77.06** |
-|    YuLan-Mini    |    2.4B    |     1.04T      |       4K       |   32.60  |  66.65 |     <ins>61.60</ins>  |  **66.70** |     55.71   |   43.58   |   N/A  |
-|    YuLan-Mini    |    2.4B    |     1.08T      |      28K       |  <ins>37.80</ins>  |  <ins>68.46</ins> |    **64.00**  |  <ins>65.90</ins>|     <ins>57.18</ins>   |   <ins>44.57</ins>   |  51.48 |
+|     MiniCPM      |    2.71B    |     1.06T      |       4K       |   15.00  |  53.83 |     50.00* |  47.31 |     56.61   |   44.27   |   N/A  |
+|      Qwen-2      |    1.54B    |       7T       |      128K      |   22.60  | 46.90* |     34.80* | 46.90* |     55.77   |   43.69   |  60.16 |
+|     Qwen2.5      |    0.49B    |      18T       |      128K      |   23.60  | 41.60* |     30.50* | 39.30* |     52.36   |   40.31   |  49.23 |
+|     Qwen2.5      |    1.54B    |      18T       |      128K      |   **45.40**  | **68.50\*** |     37.20* | 60.20* |     **58.77**   |   44.33   |  <ins>68.26</ins> |
+|     Gemma2       |    2.61B    |       2T       |       8K       |   18.30* | 30.30* |     19.50* | 42.10* |       -     |      -    |   N/A  |
+|    StableLM2     |    1.64B    |       2T       |       4K       |     -    |  20.62 |      8.50* |  17.50 |     56.33   |   **45.06**   |   N/A  |
+|    SmolLM2       |    1.71B    |      11T       |       8K       |   11.80  |    -   |     23.35  |  45.00 |     55.77   |   43.06   |   N/A  |
+|    Llama3.2      |    3.21B    |       9T       |      128K      |    7.40  |    -   |     29.30  |  49.70 |     55.29   |   43.34   |  **77.06** |
+|    YuLan-Mini    |    2.42B    |     1.04T      |       4K       |   32.60  |  66.65 |     <ins>61.60</ins>  |  **66.70** |     55.71   |   43.58   |   N/A  |
+|    YuLan-Mini    |    2.42B    |     1.08T      |      28K       |  <ins>37.80</ins>  |  <ins>68.46</ins> |    **64.00**  |  <ins>65.90</ins>|     <ins>57.18</ins>   |   <ins>44.57</ins>   |  51.48 |
 
 
 |      Models      | LAMBADA | MMLU  | CMMLU | CEval | HellaSwag | WinoGrande | StoryCloze | ARC-e | ARC-c |
 |:----------------|:-------|:-----|:-----|:-----|:----------|:-----------|:-----------|:-----|:-----|
-|   MiniCPM-2.6B   |  61.91  | 53.37 | 48.97 | 48.24 |   67.92    |     65.74   |     78.51   | 55.51 | 43.86 |
-|   Qwen2-1.5B     |  64.68  | 55.90 | **70.76** | **71.94** |   66.11    |     66.14   |     77.60   | 62.21 | 42.92 |
-|  Qwen2.5-0.5B    |  52.00  | 47.50 | 52.17 | 54.27 |   50.54    |     55.88   |     71.67   | 56.10 | 39.51 |
-|  Qwen2.5-1.5B    |  62.12  | <ins>60.71</ins> | <ins>67.82</ins> | <ins>69.05</ins> |   67.18    |     64.48   |     76.80   | **71.51** | <ins>53.41</ins> |
-|   Gemma2-2.6B    |    -    | 52.20*|   -   | 28.00*|   <ins>74.60*</ins>   |    **71.50\***   |       -     |   -   | **55.70\***|
-| StableLM2-1.7B   |  66.15  | 40.37 | 29.29 | 26.99 |   69.79    |     64.64   |     <ins>78.56</ins>   | 54.00 | 40.78 |
-|  SmolLM2-1.7B    |  <ins>67.42</ins>  | 51.91 | 33.46 | 35.10 |   72.96    |     67.40   |     **79.32**   | 44.82 | 35.49 |
-|   Llama3.2-3B    |  **69.08**  | **63.40** | 44.44 | 44.49 |   **75.62**    |     <ins>67.48</ins>   |     76.80   | <ins>70.12</ins> | 48.81 |
-|    YuLan-Mini    |  64.72  | 51.79 | 48.35 | 51.47 |   68.65    |     67.09   |     76.37   | 69.87 | 50.51 |
-|    YuLan-Mini    |  65.67  | 49.10 | 45.45 | 48.23 |   67.22    |     67.24   |     75.89   | 67.47 | 49.32 |
+|   MiniCPM-2.71B   |  61.91  | 53.37 | 48.97 | 48.24 |   67.92    |     65.74   |     78.51   | 55.51 | 43.86 |
+|   Qwen2-1.54B     |  64.68  | 55.90 | **70.76** | **71.94** |   66.11    |     66.14   |     77.60   | 62.21 | 42.92 |
+|  Qwen2.5-0.49B    |  52.00  | 47.50 | 52.17 | 54.27 |   50.54    |     55.88   |     71.67   | 56.10 | 39.51 |
+|  Qwen2.5-1.54B    |  62.12  | <ins>60.71</ins> | <ins>67.82</ins> | <ins>69.05</ins> |   67.18    |     64.48   |     76.80   | **71.51** | <ins>53.41</ins> |
+|   Gemma2-2.61B    |    -    | 52.20*|   -   | 28.00*|   <ins>74.60*</ins>   |    **71.50\***   |       -     |   -   | **55.70\***|
+| StableLM2-1.64B   |  66.15  | 40.37 | 29.29 | 26.99 |   69.79    |     64.64   |     <ins>78.56</ins>   | 54.00 | 40.78 |
+|  SmolLM2-1.71B    |  <ins>67.42</ins>  | 51.91 | 33.46 | 35.10 |   72.96    |     67.40   |     **79.32**   | 44.82 | 35.49 |
+|   Llama3.2-3.21B    |  **69.08**  | **63.40** | 44.44 | 44.49 |   **75.62**    |     <ins>67.48</ins>   |     76.80   | <ins>70.12</ins> | 48.81 |
+|    YuLan-Mini-2.42B-4K    |  64.72  | 51.79 | 48.35 | 51.47 |   68.65    |     67.09   |     76.37   | 69.87 | 50.51 |
+|    YuLan-Mini-2.42B-28K    |  65.67  | 49.10 | 45.45 | 48.23 |   67.22    |     67.24   |     75.89   | 67.47 | 49.32 |
 
 
 ---
@@ -79,12 +81,96 @@ Our pre-training methodology improves training efficiency through three key inno
 
 To enhance research transparency and reproducibility, we are open-sourcing relevant [pre-training resources](https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain):
 
+### Pre-Training
+
 <details><summary>1. Pre-training and Evaluation Code</summary>
 
-The pre-training and evaluation code will be released in a future update.
+The pre-training code can be found [here](https://github.com/RUC-GSAI/YuLan-Mini/tree/main/pretrain). Note that due to subsequent code modifications, this code may not run directly and may require some adjustments.
+
+<h4 id="step-1-modify-the-config-json-">Step 1: Modify the <code>config.json</code></h4>
+<p>Due to the implementation of Hugging Face Trainer, certain parameters are stored in the <code>config.json</code> file and cannot be modified through the Trainer&#39;s command-line arguments. Therefore, you need to update these parameters in the <code>config.json</code> file first, particularly:</p>
+<ul>
+<li><strong><code>save_steps</code></strong>: The frequency of saving intermediate checkpoints.</li>
+<li><strong><code>train_batch_size</code></strong>: The batch size per GPU (equivalent to <code>per_device_train_batch_size</code> in the Trainer). We used a batch size of 1008 (approximately 4M tokens) during the stable training stage. Maintaining this same batch size is equally important for training effectiveness.</li>
+</ul>
+<p>Below is an example of a properly configured <code>config.json</code> file:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"best_metric"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"best_model_checkpoint"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"epoch"</span>: <span class="hljs-number">0.0</span>,
+  <span class="hljs-attr">"eval_steps"</span>: <span class="hljs-number">500</span>,
+  <span class="hljs-attr">"global_step"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"is_hyper_param_search"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"is_local_process_zero"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"is_world_process_zero"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"log_history"</span>: [],
+  <span class="hljs-attr">"logging_steps"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"max_steps"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"num_input_tokens_seen"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"num_train_epochs"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"save_steps"</span>: <span class="hljs-number">250</span>,
+  <span class="hljs-attr">"stateful_callbacks"</span>: {
+    <span class="hljs-attr">"TrainerControl"</span>: {
+      <span class="hljs-attr">"args"</span>: {
+        <span class="hljs-attr">"should_epoch_stop"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_evaluate"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_log"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_save"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"should_training_stop"</span>: <span class="hljs-literal">true</span>
+      },
+      <span class="hljs-attr">"attributes"</span>: {}
+    }
+  },
+  <span class="hljs-attr">"total_flos"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"train_batch_size"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"trial_name"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"trial_params"</span>: <span class="hljs-literal">null</span>
+}
+</code></pre>
+<h4 id="step-2-enable-universal-checkpointing-in-the-deepspeed-configuration">Step 2: Enable Universal Checkpointing in the DeepSpeed Configuration</h4>
+<p>To ensure DeepSpeed Integration loads the Universal Checkpoint, you need to enable this feature in the DeepSpeed configuration JSON file. </p>
+<p>Here is an example of a ZeRO2 configuration with Universal Checkpointing enabled:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"bf16"</span>: {
+    <span class="hljs-attr">"enabled"</span>: <span class="hljs-string">"auto"</span>
+  },
+  <span class="hljs-attr">"zero_optimization"</span>: {
+    <span class="hljs-attr">"stage"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">"allgather_partitions"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"allgather_bucket_size"</span>: <span class="hljs-number">8e8</span>,
+    <span class="hljs-attr">"overlap_comm"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"reduce_scatter"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"reduce_bucket_size"</span>: <span class="hljs-number">8e8</span>,
+    <span class="hljs-attr">"contiguous_gradients"</span>: <span class="hljs-literal">true</span>
+  },
+  <span class="hljs-attr">"gradient_accumulation_steps"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"gradient_clipping"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"steps_per_print"</span>: <span class="hljs-number">16</span>,
+  <span class="hljs-attr">"train_batch_size"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"train_micro_batch_size_per_gpu"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"wall_clock_breakdown"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"dump_state"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"optimizer"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"AdamW"</span>,
+    <span class="hljs-attr">"params"</span>: {
+      <span class="hljs-attr">"lr"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"betas"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"eps"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"weight_decay"</span>: <span class="hljs-string">"auto"</span>
+    }
+  },
+  <span class="hljs-attr">"checkpoint"</span>: {
+    <span class="hljs-attr">"load_universal"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<h4 id="step-3-resume-training">Step 3: Resume Training</h4>
+<p>When calling <code>trainer.train</code>, include the <code>resume_from_checkpoint</code> argument to load the distributed optimizer state from the Universal Checkpoint and resume training.</p>
+<pre><code class="lang-python"><span class="hljs-attr">trainer.train(resume_from_checkpoint</span>=<span class="hljs-string">training_args.resume_from_checkpoint)</span>
+</code></pre>
+<p>We provide an internal <a href="https://github.com/RUC-GSAI/YuLan-Mini/tree/main/pretrain">training framework</a> for your reference, but you are free to choose other frameworks.</p>
+
 </details>
-
-
 
 <details><summary>2. Intermediate Stage Checkpoints</summary>
 The intermediate stage checkpoints are released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini</a>.
@@ -204,6 +290,8 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 <a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">YuLan-Mini-Before-Annealing</a>
 </details>
 
+### Datasets
+
 
 <details><summary>4. The Used Open-Source Datasets </summary>
 
@@ -215,7 +303,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">
   <div align=center>
-    <img src="assets/data_distribution_for_every_phase.png">
+    <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
   </div>
 </a>
 
@@ -223,7 +311,8 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <details><summary>6. Synthetic Data</summary>
 
-Data cleaning and synthesis pipeline:
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/preprocess">Data cleaning</a> and <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/synthesis">synthesis</a> pipeline:
+
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>

@@ -7,6 +7,8 @@ To enhance research transparency and reproducibility, we are open-sourcing relev
 
 <details><summary>1. Pre-training and Evaluation Code</summary>
 
+The pre-training code can be found [here](https://github.com/RUC-GSAI/YuLan-Mini/tree/main/pretrain). Note that due to subsequent code modifications, this code may not run directly and may require some adjustments.
+
 <pre><code>├── train.py  <span class="hljs-comment"># 👈🏻 The main training script</span>
 ├── train.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># 👈🏻 The main training script for each curriculum phase</span>
 ├── yulanmini-2B-final-phase25.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># 👈🏻 example script for phase 25</span>
