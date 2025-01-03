@@ -2,12 +2,12 @@
 
 To enhance research transparency and reproducibility, we are open-sourcing relevant pre-training resources:
 
+### Pre-Training
+
 <details><summary>1. Pre-training and Evaluation Code</summary>
 
 The pre-training and evaluation code will be released in a future update.
 </details>
-
-
 
 <details><summary>2. Intermediate Stage Checkpoints</summary>
 The intermediate stage checkpoints are released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini</a>.
@@ -127,6 +127,8 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 <a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">YuLan-Mini-Before-Annealing</a>
 </details>
 
+### Daatasets
+
 
 <details><summary>4. The Used Open-Source Datasets </summary>
 
@@ -138,7 +140,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">
   <div align=center>
-    <img src="assets/data_distribution_for_every_phase.png">
+    <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
   </div>
 </a>
 
@@ -146,7 +148,8 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <details><summary>6. Synthetic Data</summary>
 
-Data cleaning and synthesis pipeline:
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/perprocess">Data cleaning</a> and <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/synthesis">synthesis</a> pipeline:
+
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
