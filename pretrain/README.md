@@ -7,6 +7,90 @@ To enhance research transparency and reproducibility, we are open-sourcing relev
 <details><summary>1. Pre-training and Evaluation Code</summary>
 
 The pre-training and evaluation code will be released in a future update.
+
+<h4 id="step-1-modify-the-config-json-">Step 1: Modify the <code>config.json</code></h4>
+<p>Due to the implementation of Hugging Face Trainer, certain parameters are stored in the <code>config.json</code> file and cannot be modified through the Trainer&#39;s command-line arguments. Therefore, you need to update these parameters in the <code>config.json</code> file first, particularly:</p>
+<ul>
+<li><strong><code>save_steps</code></strong>: The frequency of saving intermediate checkpoints.</li>
+<li><strong><code>train_batch_size</code></strong>: The batch size per GPU (equivalent to <code>per_device_train_batch_size</code> in the Trainer). We used a batch size of 1008 (approximately 4M tokens) during the stable training stage. Maintaining this same batch size is equally important for training effectiveness.</li>
+</ul>
+<p>Below is an example of a properly configured <code>config.json</code> file:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"best_metric"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"best_model_checkpoint"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"epoch"</span>: <span class="hljs-number">0.0</span>,
+  <span class="hljs-attr">"eval_steps"</span>: <span class="hljs-number">500</span>,
+  <span class="hljs-attr">"global_step"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"is_hyper_param_search"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"is_local_process_zero"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"is_world_process_zero"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"log_history"</span>: [],
+  <span class="hljs-attr">"logging_steps"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"max_steps"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"num_input_tokens_seen"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"num_train_epochs"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"save_steps"</span>: <span class="hljs-number">250</span>,
+  <span class="hljs-attr">"stateful_callbacks"</span>: {
+    <span class="hljs-attr">"TrainerControl"</span>: {
+      <span class="hljs-attr">"args"</span>: {
+        <span class="hljs-attr">"should_epoch_stop"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_evaluate"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_log"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_save"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"should_training_stop"</span>: <span class="hljs-literal">true</span>
+      },
+      <span class="hljs-attr">"attributes"</span>: {}
+    }
+  },
+  <span class="hljs-attr">"total_flos"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"train_batch_size"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"trial_name"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"trial_params"</span>: <span class="hljs-literal">null</span>
+}
+</code></pre>
+<h4 id="step-2-enable-universal-checkpointing-in-the-deepspeed-configuration">Step 2: Enable Universal Checkpointing in the DeepSpeed Configuration</h4>
+<p>To ensure DeepSpeed Integration loads the Universal Checkpoint, you need to enable this feature in the DeepSpeed configuration JSON file. </p>
+<p>Here is an example of a ZeRO2 configuration with Universal Checkpointing enabled:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"bf16"</span>: {
+    <span class="hljs-attr">"enabled"</span>: <span class="hljs-string">"auto"</span>
+  },
+  <span class="hljs-attr">"zero_optimization"</span>: {
+    <span class="hljs-attr">"stage"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">"allgather_partitions"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"allgather_bucket_size"</span>: <span class="hljs-number">8e8</span>,
+    <span class="hljs-attr">"overlap_comm"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"reduce_scatter"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"reduce_bucket_size"</span>: <span class="hljs-number">8e8</span>,
+    <span class="hljs-attr">"contiguous_gradients"</span>: <span class="hljs-literal">true</span>
+  },
+  <span class="hljs-attr">"gradient_accumulation_steps"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"gradient_clipping"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"steps_per_print"</span>: <span class="hljs-number">16</span>,
+  <span class="hljs-attr">"train_batch_size"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"train_micro_batch_size_per_gpu"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"wall_clock_breakdown"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"dump_state"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"optimizer"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"AdamW"</span>,
+    <span class="hljs-attr">"params"</span>: {
+      <span class="hljs-attr">"lr"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"betas"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"eps"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"weight_decay"</span>: <span class="hljs-string">"auto"</span>
+    }
+  },
+  <span class="hljs-attr">"checkpoint"</span>: {
+    <span class="hljs-attr">"load_universal"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<h4 id="step-3-resume-training">Step 3: Resume Training</h4>
+<p>When calling <code>trainer.train</code>, include the <code>resume_from_checkpoint</code> argument to load the distributed optimizer state from the Universal Checkpoint and resume training.</p>
+<pre><code class="lang-python"><span class="hljs-attr">trainer.train(resume_from_checkpoint</span>=<span class="hljs-string">training_args.resume_from_checkpoint)</span>
+</code></pre>
+<p>We provide an internal <a href="https://github.com/RUC-GSAI/YuLan-Mini/tree/main/pretrain">training framework</a> for your reference, but you are free to choose other frameworks.</p>
+
 </details>
 
 <details><summary>2. Intermediate Stage Checkpoints</summary>
@@ -127,7 +211,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 <a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">YuLan-Mini-Before-Annealing</a>
 </details>
 
-### Daatasets
+### Datasets
 
 
 <details><summary>4. The Used Open-Source Datasets </summary>
