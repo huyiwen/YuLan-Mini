@@ -4,9 +4,19 @@ To enhance research transparency and reproducibility, we are open-sourcing relev
 
 ### Pre-Training
 
+
 <details><summary>1. Pre-training and Evaluation Code</summary>
 
-The pre-training and evaluation code will be released in a future update.
+<pre><code>├── train.py  <span class="hljs-comment"># 👈🏻 The main training script</span>
+├── train.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># 👈🏻 The main training script for each curriculum phase</span>
+├── yulanmini-2B-final-phase25.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># 👈🏻 example script for phase 25</span>
+├── yulanmini-2B-s25d-decay80-1sqrt-long-28k-final-phase26.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># 👈🏻 example script for phase 26</span>
+├── ds2_config_adamw.<span class="hljs-keyword">json </span> <span class="hljs-comment"># The DeepSpeed configuration file</span>
+├── setup.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># The setup script for the training environment</span>
+├── torchrun_wrapper.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># The wrapper script for torchrun</span>
+├── train_utils.py  <span class="hljs-comment"># The training utility functions</span>
+└── yulanmini_trainer.py  <span class="hljs-comment"># 👈🏻 The Trainer class for training</span>
+</code></pre>
 
 <h4 id="step-1-modify-the-config-json-">Step 1: Modify the <code>config.json</code></h4>
 <p>Due to the implementation of Hugging Face Trainer, certain parameters are stored in the <code>config.json</code> file and cannot be modified through the Trainer&#39;s command-line arguments. Therefore, you need to update these parameters in the <code>config.json</code> file first, particularly:</p>
@@ -232,7 +242,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <details><summary>6. Synthetic Data</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/perprocess">Data cleaning</a> and <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/synthesis">synthesis</a> pipeline:
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/preprocess">Data cleaning</a> and <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/synthesis">synthesis</a> pipeline:
 
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
