@@ -343,8 +343,8 @@ def prepare_data(tokenizer,
 def get_model_tokenizer(model_args, data_args, training_args):
     from transformers import AutoTokenizer, LlamaTokenizer, LlamaTokenizerFast
 
-    from model.configuration_yulanmini import YuLanMiniConfig
-    from model.modeling_yulanmini import YuLanMiniModelForCausalLM
+    from configuration_yulanmini import YuLanMiniConfig
+    from modeling_yulanmini import YuLanMiniModelForCausalLM
 
     if not os.path.exists(model_args.model_name_or_path):
 
