@@ -9,6 +9,14 @@ To enhance research transparency and reproducibility, we are open-sourcing relev
 
 The pre-training code can be found [here](https://github.com/RUC-GSAI/YuLan-Mini/tree/main/pretrain). Note that due to subsequent code modifications, this code may not run directly and may require some adjustments.
 
+<h3 id="key-features-">Key Features:</h3>
+<ol>
+<li><strong>Stability</strong>: We adopted muP initialization and scaling factor, as well as the reparameterization method of WeSaR, achieving training stability without significantly increasing training time. For details, see our technical report.</li>
+<li><strong>Training efficiency</strong>: By using the <code>flash_attn</code> and <code>liger_kernel</code> libraries, we achieved 51% MFU (in comparison, Megatron only has about 41% MFU on small models of the same scale).</li>
+<li><strong>Data curriculum</strong>: We modified the HF Trainer to make it suitable for training in successive curriculum phases and different decay functions of WSD.</li>
+<li><strong>Other features</strong>: Support automatic restart training of torchrun, wandb records hidden states to monitor training stability, and other attempts (such as QK-LayerNorm, Embedding Gradient Shrink, etc.).</li>
+</ol>
+
 <pre><code>├── train.py  <span class="hljs-comment"># 👈🏻 The main training script</span>
 ├── train.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># 👈🏻 The main training script for each curriculum phase</span>
 ├── yulanmini-2B-final-phase25.<span class="hljs-keyword">sh </span> <span class="hljs-comment"># 👈🏻 example script for phase 25</span>
@@ -20,6 +28,7 @@ The pre-training code can be found [here](https://github.com/RUC-GSAI/YuLan-Mini
 └── yulanmini_trainer.py  <span class="hljs-comment"># 👈🏻 The Trainer class for training</span>
 </code></pre>
 
+<h3 id="key-features-">Continual Training Tutorial:</h3>
 <h4 id="step-1-modify-the-config-json-">Step 1: Modify the <code>config.json</code></h4>
 <p>Due to the implementation of Hugging Face Trainer, certain parameters are stored in the <code>config.json</code> file and cannot be modified through the Trainer&#39;s command-line arguments. Therefore, you need to update these parameters in the <code>config.json</code> file first, particularly:</p>
 <ul>
