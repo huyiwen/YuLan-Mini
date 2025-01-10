@@ -19,7 +19,7 @@ YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achie
 
 ## Model Downloads 🔗
 
-> YuLan-Mini is part of the [YuLan family](https://huggingface.co/yulan-team/YuLan-Chat), which includes models with larger sizes and different training strategies.
+> YuLan-Mini is part of the [YuLan family](https://github.com/RUC-GSAI/YuLan-Chat), which includes models with larger sizes and different training strategies.
 
 |  Model  | Context Length | SFT | 🤗 Hugging Face | Wise Model |
 |---------|----------------|-----|-----------------|------------|
