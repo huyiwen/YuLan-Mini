@@ -1,6 +1,8 @@
 # Data Synthesis
 
-## Preparation
+## Preliminary
+
+### SGLang
 
 We primarily use the [`sglang`](https://docs.sglang.ai/start/install.html) package to generate synthetic data.
 
@@ -14,6 +16,14 @@ For those who run the model on a large cluster, you can install the [`sglang_rou
 
 ```bash
 pip install sglang-router
+```
+
+### vLLM
+
+We also use the [`vLLM`](https://docs.vllm.ai/) package to generate synthetic data (on Ascend 910B NPU).
+
+```bash
+python gen_vllm.py --input_file_path input.jsonl --output_file_path output.jsonl
 ```
 
 ## Prompts
