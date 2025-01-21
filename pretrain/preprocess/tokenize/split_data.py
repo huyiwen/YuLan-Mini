@@ -156,7 +156,7 @@ def process_dataset(fd):
 
         try:
             for root_dir, _, files in os.walk(raw_src_folder, topdown=False):
-                max_part = max([int(fp.split("-")[-1].split(".")[0]) for fp in files if "splitted_part" in fp and "tokens" not in fp], default=-1)
+                max_part = max([int(fp.split("-")[-1].split(".")[0]) for fp in files if "splitted_part" in fp and "metadata" not in fp], default=-1)
                 for fp in files:
                     if "sort" in fp or "splitted_part" in fp:
                         continue
