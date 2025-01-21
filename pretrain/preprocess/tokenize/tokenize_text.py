@@ -24,6 +24,8 @@ MAX_DATA = int(1e7)
 raw_data_prefix = os.environ["RAW_DATA_PREFIX"]
 input_ids_prefix = os.environ["INPUT_IDS_PREFIX"]
 
+SKIP_TOKENIZATION_EXTENTIONS = {".py", ".git", ".md", ".png", ".jpg"}
+
 
 def get_tgt_folder(file_path, model_name):
     """Each jsonl or parquet file will generate a folder with the same name."""
@@ -45,6 +47,17 @@ def get_tgt_folder(file_path, model_name):
 
 def warn(msg):
     print("\033[0;33m" + str(msg) + "\033[0m")
+
+
+def clean_fn(text: str) -> str:
+    """Data cleaning function. Important notice: this function applies to ALL the text data."""
+    if not isinstance(text, str):
+        warn(f"Type Error: {type(text)} {str(text)[:10]}...")
+        text = str(text)
+
+    text = text.replace("\u3000", " ")  # remove wide space
+
+    return text
 
 
 def tokenize_text(dataset,
@@ -69,7 +82,7 @@ def tokenize_text(dataset,
         for batch_st in tqdm(range(0, len(dataset), batch_size)):
             batch_data = dataset[batch_st:batch_st + batch_size]
             batch_file_nos = file_nos[batch_st:batch_st + batch_size]
-            input_ids = tokenizer([data[text_key] for data in batch_data],
+            input_ids = tokenizer([clean_fn(data[text_key]) for data in batch_data],
                                 add_special_tokens=False)["input_ids"]
             for ipts, no in zip(input_ids, batch_file_nos):
                 new_data = {"input_ids": ipts, "source": f"{src_folder}:{no}"}
@@ -105,6 +118,7 @@ def start_mp(dataset, is_first, src_folder, file_nos):
     def sample_seed():
         return seed
 
+    # shuffle again
     # random.shuffle(dataset, sample_seed)
     # random.shuffle(file_nos, sample_seed)
     random.shuffle(dataset)
@@ -141,7 +155,10 @@ if __name__ == "__main__":
     kwargs = {}
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_path, **kwargs)
 
+    # register signal handler
     signal.signal(signal.SIGINT, interrupt_handler)
+
+    # start tokenization
     for root, _, files in os.walk(args.data_path, topdown=False):
         step = 0
         random.shuffle(files)
@@ -151,10 +168,19 @@ if __name__ == "__main__":
                 break
 
             file_path = os.path.join(root, fp)
-            if ".git" in file_path:
+
+            # check file extention
+            skip_tokenization = False
+            for ext in SKIP_TOKENIZATION_EXTENTIONS:
+                if file_path.endswith(ext):
+                    skip_tokenization = True
+                    break
+            if skip_tokenization:
                 continue
+
+            # check target folder existance
             tgt_folder, is_exists = get_tgt_folder(file_path, args.model_name)
-            if is_exists == True and args.skip_exist == True:
+            if is_exists and args.skip_exist:
                 warn(f"skip {fp}")
                 continue
 
@@ -171,6 +197,7 @@ if __name__ == "__main__":
                 started = 0
                 for i in trange(MAX_DATA, desc="Reading Data"):
                     try:
+                        # get dataset & line number
                         dataset = [next(ds) for _ in range(320000)]
                         file_nos = [started + i for i in range(len(dataset))]
 
@@ -185,6 +212,7 @@ if __name__ == "__main__":
 
             if file_path.endswith(".json") == True:
                 try:
+                    # get dataset & line number
                     dataset = json.load(fin)
                     file_nos = [i for i in range(len(dataset))]
 
@@ -204,6 +232,7 @@ if __name__ == "__main__":
                 is_first = True
                 started = 0
                 while True:
+                    # get dataset
                     dataset = []
                     for i in trange(MAX_DATA, desc="Reading Data"):
                         tmp_data = fin.readline()
@@ -212,16 +241,12 @@ if __name__ == "__main__":
                             break
                         try:
                             tmp_data = json.loads(tmp_data)
-                            tmp_data["text"] = str(tmp_data["text"]).replace(
-                                "\u3000", " ")  ###清洗数据
-                            url_pattern = re.compile(r'https?://\S+|www\.\S+')
-                            tmp_data["text"] = url_pattern.sub(
-                                '<url>', tmp_data["text"])
                             dataset.append(tmp_data)
                         except json.decoder.JSONDecodeError as e:
                             warn(str(e) + tmp_data)
                             continue
 
+                    # get line number
                     file_nos = [started + i for i in range(len(dataset))]
                     start_mp(dataset, is_first, file_path, file_nos)
                     is_first = False  # append mode
@@ -229,6 +254,7 @@ if __name__ == "__main__":
                         break
             elif file_path.endswith(".parquet"):
                 try:
+                    # get dataset & line number
                     table = pq.read_table(file_path)
                     file_nos = [i for i in range(len(table))]
                     start_mp(table.to_pylist(), True, file_path, file_nos)

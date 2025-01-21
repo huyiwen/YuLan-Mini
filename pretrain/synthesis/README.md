@@ -1,5 +1,11 @@
 # Data Synthesis
 
+This directory contains the scripts and prompts for data synthesis.
+
+<div align=center>
+<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
+</div>
+
 ## Preliminary
 
 ### SGLang

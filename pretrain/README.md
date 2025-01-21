@@ -251,15 +251,17 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 </details>
 
-<details><summary>6. Synthetic Data</summary>
+<details><summary>6. Data Preprocessing and Synthesis Pipeline</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/preprocess">Data cleaning</a> and <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/synthesis">synthesis</a> pipeline:
+The synthetic data we are using is released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini-Datasets</a>
+
+
+We also released the <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/preprocess">data preprocessing</a> (including data formatting, filtering, tokenization, and mixing) and <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/synthesis">synthesis pipeline</a> for your reference.
+
 
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
-
-The synthetic data we are using is released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini-Datasets</a>
 
 </details>
 
