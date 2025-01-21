@@ -13,7 +13,16 @@ from pyarrow import parquet as pq
 # split data by 0.01B tokens (this is a soft limit)
 MAX_TOKEN = int(0.01 * 1000 * 1000 * 1000)
 
-father_datasets = list(sys.argv)[1:]
+if len(sys.argv) >= 3:
+    father_datasets = list(sys.argv)[2:]
+    datasets_to_delete = sys.argv[1]
+else:
+    father_datasets = list(sys.argv)[1:]
+    datasets_to_delete = "datasets_to_delete.txt"
+print("father_datasets", father_datasets)
+print("datasets_to_delete", datasets_to_delete)
+
+metadata_columns = ["source"]
 
 # replace raw data path with input_ids path
 raw_data_prefix = os.environ["RAW_DATA_PREFIX"]
@@ -31,7 +40,7 @@ def warn(msg):
 
 def process_file(src_folder, src_file, print_id, write_format="parquet", is_last=False, last_states=None, max_part=-1):
 
-    def write_to_file(all_data, num_tokens: int, cur_idx: int, tokens_num: list):
+    def write_to_file(all_data, num_tokens: int, cur_idx: int, metadata: list):
         """Write splitted data and metadata."""
 
         cur_idx = f"{cur_idx:04d}"
@@ -50,46 +59,50 @@ def process_file(src_folder, src_file, print_id, write_format="parquet", is_last
 
         tokens_num_tgt_path = os.path.join(src_folder, "splitted_part-{}-metadata.json".format(cur_idx))
         with open(tokens_num_tgt_path, "w") as fout:
-            json.dump({"total_tokens_num": num_tokens, "tokens_num": tokens_num}, fout, indent=2)
+            json.dump({"total_tokens_num": num_tokens, "metadata": metadata}, fout, indent=2)
 
     def load_data_jsonl(fin):
         """Read one line and return as parsed json data."""
-        data = fin.readline()
+        data = fin.readline().strip()
         if not data:
             return None
         else:
             json_data = json.loads(data)
-            new_data = json_data["input_ids"]
-            return (new_data, len(json_data["input_ids"]))
+            input_ids = json_data["input_ids"]
+            meta_data = {col: json_data[col] for col in metadata_columns if col in json_data}
+            meta_data["num_tokens"] = len(input_ids)
+            return (input_ids, meta_data)
 
     all_data = []
-    tokens_num = []
+    metadata = []
     num_tokens = 0
     cur_idx = max_part + 1
     if last_states is not None:
-        all_data, num_tokens, cur_idx, tokens_num = last_states
+        all_data, num_tokens, cur_idx, metadata = last_states
 
     if src_file.endswith(".parquet"):
+
+        warn("Deprecated: parquet file as intermediate format is deprecated. Please use jsonl format instead.")
 
         # parquet read
         table = pq.read_table(src_file)
         all_all_data = table["input_ids"].to_pylist()
         for ids in all_all_data:
             all_data.append(ids)
-            tokens_num.append(len(ids))
+            metadata.append({"num_tokens": len(ids)})
             num_tokens += len(ids)
             if num_tokens > MAX_TOKEN:
                 # flush new splitted data to file
-                write_to_file(all_data, num_tokens, cur_idx, tokens_num)
+                write_to_file(all_data, num_tokens, cur_idx, metadata)
                 all_data = []
-                tokens_num = []
+                metadata = []
                 num_tokens = 0
                 cur_idx += 1
                 print(print_id, "next split", cur_idx)
 
         # trailing lines
         if len(all_data) > 0 and is_last:
-            write_to_file(all_data, num_tokens, cur_idx, tokens_num)
+            write_to_file(all_data, num_tokens, cur_idx, metadata)
 
     elif src_file.endswith(".jsonl"):
 
@@ -102,24 +115,26 @@ def process_file(src_folder, src_file, print_id, write_format="parquet", is_last
 
                 # add data
                 all_data.append(data[0])
-                tokens_num.append(data[1])
-                num_tokens += data[1]
+                metadata.append(data[1])
+                num_tokens += data[1]["num_tokens"]
                 if num_tokens > MAX_TOKEN:
                     # flush new splitted data to file
-                    write_to_file(all_data, num_tokens, cur_idx, tokens_num)
+                    write_to_file(all_data, num_tokens, cur_idx, metadata)
                     all_data = []
-                    tokens_num = []
+                    metadata = []
                     num_tokens = 0
                     cur_idx += 1
 
         # trailing lines of whole wo_ppl folder
         if len(all_data) > 0 and is_last:
-            write_to_file(all_data, num_tokens, cur_idx, tokens_num)
+            write_to_file(all_data, num_tokens, cur_idx, metadata)
 
-    with open("datasets_to_delete.txt", "a") as f:
+    with open(datasets_to_delete, "a") as f:
         f.write(src_file + "\n")
         print(print_id, src_file, "added to delete list")
-    return all_data, num_tokens, cur_idx, tokens_num
+
+    # pass states to next file
+    return all_data, num_tokens, cur_idx, metadata
 
 
 def do_parts(src_folder, src_files, max_part: int):
@@ -137,7 +152,7 @@ def process_dataset(fd):
     folder2file = {}
     for dataset_name in tqdm(datasets):
         raw_src_folder = os.path.join(fd, dataset_name)
-        print("Processing {} ...".format(raw_src_folder))
+        print("Finding intermediate results in {} ...".format(raw_src_folder))
 
         try:
             for root_dir, _, files in os.walk(raw_src_folder, topdown=False):
@@ -166,7 +181,7 @@ def process_dataset(fd):
     folder_n = len(folder2file)
     p = mp.Pool(32)
     for idx, (src_folder, (src_files, max_part)) in enumerate(folder2file.items()):
-        print(f"submitting {idx + 1} / {folder_n}", src_folder, len(src_files))
+        print(f"Splitting {idx + 1} / {folder_n}", src_folder, len(src_files))
         p.apply_async(do_parts, args=(src_folder, src_files, max_part))
     p.close()
     p.join()
@@ -179,5 +194,5 @@ if __name__ == "__main__":
         for fd in father_datasets:
             process_dataset(fd)
     except (Exception, KeyboardInterrupt) as e:
-        warn("Early abortion. Please delete manully files in datasets_to_delete.txt")
+        warn(f"Early abortion. Please delete manully files in {datasets_to_delete}")
         raise e

@@ -60,7 +60,7 @@ def tokenize_text(dataset,
         write_mode = "a"
     else:
         if skip_exists and os.path.exists(tgt_path):
-            warn(f"skip {tgt_path}")
+            warn(f"skip tokenizing {tgt_path}")
             return
         write_mode = "w"
 
@@ -147,7 +147,7 @@ if __name__ == "__main__":
         random.shuffle(files)
         for fp in tqdm(files):
             if wanna_exit:
-                print("Process done.")
+                print("Tokenization done.")
                 break
 
             file_path = os.path.join(root, fp)
@@ -158,7 +158,7 @@ if __name__ == "__main__":
                 warn(f"skip {fp}")
                 continue
 
-            print("Process {}".format(file_path))
+            print("Tokenizing {}".format(file_path))
             print("Target Folder: {}".format(tgt_folder))
 
             fin = open(file_path, "r")
