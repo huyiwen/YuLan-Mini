@@ -51,8 +51,9 @@ bash download_datasets_step1.sh HuggingFaceFW/fineweb-edu --dataset
 # Step2: Select the subsets you want to download
 cd fineweb-edu
 grep -E "CC-MAIN-2024" urls.txt > urls_selected.txt
+aria2c --console-log-level=error -s 4 -c --auto-file-renaming=false --check-certificate=false --file-allocation=none --enable-rpc
 
-# Step3: Download the selected subsets
+# Step3: (Open another terminal) Download the selected subsets
 bash download_datasets_step3.sh urls_selected.txt
 ```
 
