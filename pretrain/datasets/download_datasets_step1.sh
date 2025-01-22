@@ -43,6 +43,7 @@ shift
 # Default values
 TOOL="wget"
 THREADS=4
+HF_ENDPOINT="https://huggingface.co"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
