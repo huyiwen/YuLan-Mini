@@ -1,6 +1,54 @@
+import contextlib
+import functools
+import math
+import os
+import shutil
+import sys
+import time
+from typing import Optional
+
+import torch
+import torch.distributed as dist
+from torch import nn
 from transformers import Trainer
+from transformers.debug_utils import DebugOption, DebugUnderflowOverflow
+from transformers.integrations import hp_params
+from transformers.integrations.deepspeed import (deepspeed_init,
+                                                 deepspeed_load_checkpoint)
+from transformers.integrations.tpu import tpu_spmd_dataloader
+from transformers.modeling_utils import unwrap_model
+from transformers.trainer import TRAINER_STATE_NAME, _is_peft_model
+from transformers.trainer_callback import ExportableState, TrainerState
+from transformers.trainer_pt_utils import get_model_param_count
+from transformers.trainer_utils import (HPSearchBackend, TrainOutput,
+                                        has_length, speed_metrics)
+from transformers.training_args import OptimizerNames, ParallelMode
+from transformers.utils import (is_accelerate_available, is_apex_available,
+                                is_sagemaker_mp_enabled,
+                                is_torch_xla_available, logging)
 
 from train_utils import get_wsd_scheduler, print_rank0
+
+logger = logging.get_logger(__name__)
+
+if is_apex_available():
+    from apex import amp
+
+if is_torch_xla_available():
+    import torch_xla.core.xla_model as xm
+    import torch_xla.debug.metrics as met
+else:
+    IS_XLA_FSDPV2_POST_2_2 = False
+
+if is_sagemaker_mp_enabled():
+    import smdistributed.modelparallel.torch as smp
+else:
+    IS_SAGEMAKER_MP_POST_1_10 = False
+
+if is_accelerate_available():
+    from accelerate import skip_first_batches
+    from accelerate.utils import DistributedType
+
 
 
 class YuLanMiniTrainer(Trainer):
@@ -22,79 +70,6 @@ class YuLanMiniTrainer(Trainer):
             self._created_lr_scheduler = True
             print("Using WSD scheduler")
         return self.lr_scheduler
-
-    def get_optimizer_grouped_parameters(self):
-        if not model_args.use_muparam_lr:
-            print_rank0("Not using muparam lr")
-            return None
-
-        # mup lr
-        param_groups = {
-            "hidden_weights_d": {},
-            "hidden_weights_o": {},
-            "hidden_weights_qkvugl": {},
-            "input_output_weights": {},
-        }
-        print_rank0(
-            "LR for q_proj,k_proj,v_proj,up_proj,gate_proj,down_proj,lm_head的weights:",
-            training_args.learning_rate /
-            (model_args.hidden_size / model_args.dim_model_base_lr))
-        print_rank0(
-            "LR for embed_tokens,q_proj.bias,k_proj.bias,v_proj.bias:",
-            training_args.learning_rate)
-
-        for name, param in model.named_parameters():
-            if not param.requires_grad:
-                continue
-            if 'down_proj' in name and 'weight' in name:
-                param_groups["hidden_weights_d"][name] = param
-            elif 'o_proj' in name and 'weight' in name:
-                param_groups["hidden_weights_o"][name] = param
-            elif ('q_proj' in name or 'k_proj' in name or 'v_proj' in name
-                    or 'up_proj' in name or 'gate_proj' in name
-                    or 'lm_head' in name) and 'weight' in name:
-                param_groups["hidden_weights_qkvugl"][name] = param
-            else:
-                param_groups["input_output_weights"][name] = param
-
-        optimizer_grouped_parameters = [
-            {
-                "params":
-                list(param_groups["input_output_weights"].values()),
-                "lr": training_args.learning_rate,
-                "weight_decay": training_args.weight_decay,
-            },
-            {
-                "params":
-                list(param_groups["hidden_weights_d"].values()),
-                "lr":
-                training_args.learning_rate /
-                (model_args.hidden_size / model_args.dim_model_base_lr),
-                "weight_decay":
-                training_args.weight_decay,
-            },
-            {
-                "params":
-                list(param_groups["hidden_weights_o"].values()),
-                "lr":
-                training_args.learning_rate /
-                (model_args.hidden_size / model_args.dim_model_base_lr),
-                "weight_decay":
-                training_args.weight_decay,
-            },
-            {
-                "params":
-                list(param_groups["hidden_weights_qkvugl"].values()),
-                "lr":
-                training_args.learning_rate /
-                (model_args.hidden_size / model_args.dim_model_base_lr),
-                "weight_decay":
-                training_args.weight_decay,
-            },
-        ]
-        print_rank0(optimizer_grouped_parameters)
-
-        return optimizer_grouped_parameters
 
     def _prepare_input(self, data):
         """
@@ -166,6 +141,7 @@ class YuLanMiniTrainer(Trainer):
             num_examples = self.num_examples(train_dataloader)
             if args.max_steps > 0:
                 max_steps = args.max_steps
+                # MODIFIED BY YULANMINI
                 # num_train_epochs = args.max_steps // num_update_steps_per_epoch + int(
                 #     args.max_steps % num_update_steps_per_epoch > 0
                 # )
@@ -176,12 +152,13 @@ class YuLanMiniTrainer(Trainer):
                 #     num_train_tokens = (
                 #         self.num_tokens(train_dataloader, args.max_steps) * args.gradient_accumulation_steps
                 #     )
-                # MODIFIED BY YULANMINI
                 num_train_epochs = math.ceil(args.num_train_epochs)
+                # MODIFIED BY YULANMINI
                 num_train_samples = args.max_steps * total_train_batch_size
                 if args.include_tokens_per_second:
-                    num_train_tokens = self.num_tokens(train_dataloader) * args.num_train_epochs
-                print("max_steps", max_steps, num_train_epochs, num_update_steps_per_epoch, num_examples, num_train_samples)
+                    num_train_tokens = (
+                        self.num_tokens(train_dataloader, args.max_steps) * args.gradient_accumulation_steps
+                    )
             else:
                 max_steps = math.ceil(args.num_train_epochs * num_update_steps_per_epoch)
                 num_train_epochs = math.ceil(args.num_train_epochs)
@@ -222,8 +199,7 @@ class YuLanMiniTrainer(Trainer):
             self._created_lr_scheduler = False
 
         if self.is_deepspeed_enabled:
-            optimizer_grouped_parameters = self.get_optimizer_grouped_parameters() if hasattr(self, "get_optimizer_grouped_parameters") else None
-            self.optimizer, self.lr_scheduler = deepspeed_init(self, num_training_steps=max_steps, optimizer_grouped_parameters=optimizer_grouped_parameters)
+            self.optimizer, self.lr_scheduler = deepspeed_init(self, num_training_steps=max_steps)
 
         if not delay_optimizer_creation:
             self.create_optimizer_and_scheduler(num_training_steps=max_steps)
@@ -345,20 +321,24 @@ class YuLanMiniTrainer(Trainer):
             self.state = TrainerState.load_from_json(os.path.join(resume_from_checkpoint, TRAINER_STATE_NAME))
             self.compare_trainer_and_checkpoint_args(self.args, self.state)
             self._load_callback_state()
+            # MODIFIED BY YULANMINI
             # epochs_trained = int(self.state.global_step // num_update_steps_per_epoch)
             # if not args.ignore_data_skip:
             #     steps_trained_in_current_epoch = self.state.global_step % (num_update_steps_per_epoch)
             #     steps_trained_in_current_epoch *= args.gradient_accumulation_steps
             # else:
             #     steps_trained_in_current_epoch = 0
-            # MODIFIED BY YULANMINI
             steps_trained_in_current_epoch = self.state.global_step - args.num_steps_trained_before_this_epoch
             epochs_trained = int(steps_trained_in_current_epoch // num_update_steps_per_epoch) + int(args.num_epochs_trained_before_this_epoch)
+            # MODIFIED BY YULANMINI
 
             logger.info("  Continuing training from checkpoint, will skip to saved global_step")
             logger.info(f"  Continuing training from epoch {epochs_trained}")
             logger.info(f"  Continuing training from global step {self.state.global_step}")
+            # MODIFIED BY YULANMINI
+            # if not args.ignore_data_skip:
             if steps_trained_in_current_epoch > 0 or epochs_trained > 0:
+            # MODIFIED BY YULANMINI
                 logger.info(
                     f"  Will skip the first {epochs_trained} epochs then the first"
                     f" {steps_trained_in_current_epoch} batches in the first epoch."
