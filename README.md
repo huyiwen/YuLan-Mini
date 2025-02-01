@@ -52,6 +52,9 @@ Our pre-training methodology improves training efficiency through three key inno
 ---
 ## Behchmarks 🌟
 
+![image](https://github.com/user-attachments/assets/c8cf5de5-67af-4d2c-a256-3c8c83ee8723)
+
+
 > Note: The model size calculation includes the embedding size.
 
 |      Models      | Model Size | # Train Tokens | Context Length | MATH 500 | GSM 8K | Human Eval | MBPP   | RACE Middle | RACE High | RULER  |
