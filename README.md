@@ -21,7 +21,7 @@ YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achie
 ## News
 
 - [2025.01.29] YuLan-Mini-Instruct-v1 released
-- [2025.12.23] YuLan-Mini & pre-training resources released
+- [2024.12.23] YuLan-Mini & pre-training resources released
 
 ## Model Downloads 🔗
 
