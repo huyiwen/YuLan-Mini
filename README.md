@@ -29,8 +29,8 @@ YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achie
 
 |  Model  | Context Length | SFT | 🤗 Hugging Face | ModelScope | Wise Model |
 |---------|----------------|-----|-----------------|------------|------------|
-| YuLan-Mini | 28K | ❎ | [`YuLan-Mini`](https://huggingface.co/yulan-team/YuLan-Mini) | [`YuLan-Mini`](https://modelscope.cn/models/yulan-team/YuLan-Mini) | [`YuLan-Mini`](https://wisemodel.cn/models/yulan-team/YuLan-Mini) |
-| YuLan-Mini-Instruct | 28K | ✅ | | | |
+| YuLan-Mini | 28K | ❎ | [`Base`](https://huggingface.co/yulan-team/YuLan-Mini) | [`Base`](https://modelscope.cn/models/yulan-team/YuLan-Mini) | [`Base`](https://wisemodel.cn/models/yulan-team/YuLan-Mini) |
+| YuLan-Mini-Instruct | 28K | ✅ | [`Instruct-V1`](https://huggingface.co/yulan-team/YuLan-Mini-Instruct-V1) | | |
 
 > The intermediate checkpoint can be found [here](https://github.com/RUC-GSAI/YuLan-Mini#pre-training-resources-)
 
