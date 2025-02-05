@@ -352,26 +352,35 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # Load model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("yulan-team/YuLan-Mini")
-model = AutoModelForCausalLM.from_pretrained("yulan-team/YuLan-Mini", torch_dtype=torch.bfloat16)
+tokenizer = AutoTokenizer.from_pretrained("yulan-team/YuLan-Mini-Instruct-V1")
+model = AutoModelForCausalLM.from_pretrained("yulan-team/YuLan-Mini-Instruct-V1", torch_dtype=torch.bfloat16)
 
 # Input text
-input_text = "Renmin University of China is"
-inputs = tokenizer(input_text, return_tensors="pt")
+chat = [
+    {"role": "system", "content": "You are YuLan-Mini, created by RUC AI Box. You are a helpful assistant."},
+    {"role": "user", "content": "What is Renmin University of China?"}
+]
+formatted_chat = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
+inputs = tokenizer(formatted_chat, return_tensors="pt", add_special_tokens=False)
 
 # Completion
-output = model.generate(inputs["input_ids"], max_new_tokens=100)
-print(tokenizer.decode(output[0], skip_special_tokens=True))
+output = model.generate(inputs["input_ids"], max_new_tokens=100, temperature=0.5)
+print(tokenizer.decode(output[0][inputs['input_ids'].size(1):], skip_special_tokens=True))
 ```
 
 **vLLM Serve Example**
 ```bash
-vllm serve yulan-team/YuLan-Mini --dtype bfloat16
+vllm serve yulan-team/YuLan-Mini-Instruct-V1 --dtype bfloat16
 ```
 
 **SGLang Serve Example**
 ```bash
-python -m sglang.launch_server --model-path yulan-team/YuLan-Mini --port 30000 --host 0.0.0.0
+python -m sglang.launch_server --model-path yulan-team/YuLan-Mini-Instruct-V1 --port 30000 --host 0.0.0.0
+```
+
+**Ollama**
+```bash
+ollama run hf.co/mradermacher/YuLan-Mini-Instruct-V1-GGUF:IQ4_XS
 ```
 
 ---
