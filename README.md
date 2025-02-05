@@ -385,6 +385,10 @@ ollama run hf.co/mradermacher/YuLan-Mini-Instruct-V1-GGUF:IQ4_XS
 
 ---
 
+## Contributing
+
+We welcome any form of contribution, including feedback on model bad cases, feature suggestions, and example contributions. You can do so by submitting an [issue](https://github.com/RUC-GSAI/YuLan-Mini/issues).
+
 ## The Team
 
 YuLan-Mini is developed and maintained by [AI Box, Renmin University of China](http://aibox.ruc.edu.cn/).
