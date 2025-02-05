@@ -404,13 +404,10 @@ YuLan-Mini is developed and maintained by [AI Box, Renmin University of China](h
 If you find YuLan-Mini helpful for your research or development, please cite [our technical report](https://arxiv.org/abs/2412.17743):
 
 ```
-@misc{hu2024yulanmini,
-      title={YuLan-Mini: An Open Data-efficient Language Model},
-      author={Yiwen Hu and Huatong Song and Jia Deng and Jiapeng Wang and Jie Chen and Kun Zhou and Yutao Zhu and Jinhao Jiang and Zican Dong and Wayne Xin Zhao and Ji-Rong Wen},
-      year={2024},
-      eprint={2412.17743},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2412.17743},
+@article{hu2024yulan,
+  title={YuLan-Mini: An Open Data-efficient Language Model},
+  author={Hu, Yiwen and Song, Huatong and Deng, Jia and Wang, Jiapeng and Chen, Jie and Zhou, Kun and Zhu, Yutao and Jiang, Jinhao and Dong, Zican and Zhao, Wayne Xin and others},
+  journal={arXiv preprint arXiv:2412.17743},
+  year={2024}
 }
 ```
