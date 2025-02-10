@@ -14,10 +14,12 @@ from transformers import (AutoConfig, AutoModelForCausalLM, LlamaConfig,
 def rebalance_weights2(model_path, method):
     target_model_path = model_path + "-" + method
     shutil.copytree(model_path, target_model_path, dirs_exist_ok=True)  # copy includes optimizer
+
+    source_model = AutoModelForCausalLM.from_pretrained(target_model_path, trust_remote_code=True)
+
     if os.path.exists(target_model_path + "/model.safetensors"):
         os.remove(target_model_path + "/model.safetensors")  # prepare for save_pretrained
 
-    source_model = AutoModelForCausalLM.from_pretrained(target_model_path, trust_remote_code=True)
     if os.path.exists(target_model_path + "/model.safetensors.index.json"):
         os.remove(target_model_path + "/model.safetensors.index.json")
         os.remove(target_model_path + "/model-00001-of-00002.safetensors")
