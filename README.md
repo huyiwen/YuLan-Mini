@@ -301,7 +301,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <details><summary>3. Optimizer States Before Annealing</summary>
 
-<a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">YuLan-Mini-Before-Annealing</a>
+<a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">🤗 YuLan-Mini-Before-Annealing</a>
 </details>
 
 ### Datasets
@@ -331,7 +331,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
 
-The synthetic data we are using is released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini-Datasets</a>
+The synthetic data we are using is released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">🤗 YuLan-Mini-Datasets</a>
 
 </details>
 
