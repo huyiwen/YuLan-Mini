@@ -52,7 +52,11 @@ Our pre-training methodology improves training efficiency through three key inno
 ---
 ## Behchmarks 🌟
 
-![image](https://github.com/user-attachments/assets/c8cf5de5-67af-4d2c-a256-3c8c83ee8723)
+| Models                  | MMLU | CEVAL | GSM8K | ARC_CHALLENGE | GPQA | MATH | HUMANEVAL@1 | MBPP@1 |
+|-------------------------|-------|-------|-------|---------------|------|------|-------------|--------|
+| Qwen-2.5-1.5B-Instruct  | 57.5  | 65.4  | 73.2  | 47.8          | 29.8 | 55.2 | 61.6        | 88.1   |
+| Llama3.2-3B-Instruct    | 60    | 45.9  | 43.4  | 78.6          | 38.6 | 48   | 51.5        | 80.4   |
+| YuLan-Mini-Instruct-V1  | 52.5  | 51    | 82.3  | 51.9          | 30.6 | 54.5 | 67.7        | 85.4   |
 
 
 > Note: The model size calculation includes the embedding size.
