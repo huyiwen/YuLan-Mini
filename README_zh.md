@@ -17,13 +17,21 @@ YuLan-Mini 是一个 2.4B 参数量的轻量化语言模型。仅使用 1.08T To
 
 ---
 
+## 新闻
+
+- [2025.01.29] YuLan-Mini-Instruct-v1 发布
+- [2024.12.23] YuLan-Mini 及预训练资源发布
+
 ## 模型下载 🔗
 
-|  Model  | Context Length | SFT | 🤗 Hugging Face | Wise Model |
-|---------|----------------|-----|-----------------|------------|
-| YuLan-Mini (Recommended) | 28K | ❎ | [`YuLan-Mini`](https://huggingface.co/yulan-team/YuLan-Mini) | [`YuLan-Mini`](https://wisemodel.cn/models/yulan-team/YuLan-Mini) |
-| YuLan-Mini-2.4B-4K | 4K | ❎ | | |
-| YuLan-Mini-Instruct | Comming soon | ✅ | | |
+> YuLan-Mini 是 [YuLan 系列](https://github.com/RUC-GSAI/YuLan-Chat) 的一部分，该系列还包括更大规模和不同训练策略的模型。
+
+|  模型  | 上下文长度 | SFT | 🤗 Hugging Face | ModelScope | Wise Model |
+|---------|----------------|-----|-----------------|------------|------------|
+| YuLan-Mini | 28K | ❎ | [`Base`](https://huggingface.co/yulan-team/YuLan-Mini) | [`Base`](https://modelscope.cn/models/yulan-team/YuLan-Mini) | [`Base`](https://wisemodel.cn/models/yulan-team/YuLan-Mini) |
+| YuLan-Mini-Instruct | 28K | ✅ | [`Instruct-V1`](https://huggingface.co/yulan-team/YuLan-Mini-Instruct-V1) | | |
+
+> 中间检查点可以在[这里](https://github.com/RUC-GSAI/YuLan-Mini#pre-training-resources-)找到。
 
 ---
 
@@ -43,6 +51,14 @@ YuLan-Mini 是一个 2.4B 参数量的轻量化语言模型。仅使用 1.08T To
 
 ---
 ## 基准测试 🌟
+
+| Models                  | MMLU | CEVAL | GSM8K | ARC_CHALLENGE | GPQA | MATH | HUMANEVAL@1 | MBPP@1 |
+|-------------------------|-------|-------|-------|---------------|------|------|-------------|--------|
+| Qwen-2.5-1.5B-Instruct  | 57.5  | 65.4  | 73.2  | 47.8          | 29.8 | 55.2 | 61.6        | 88.1   |
+| Llama3.2-3B-Instruct    | 60    | 45.9  | 43.4  | 78.6          | 38.6 | 48   | 51.5        | 80.4   |
+| YuLan-Mini-Instruct-V1  | 52.5  | 51    | 82.3  | 51.9          | 30.6 | 54.5 | 67.7        | 85.4   |
+
+> 注意：模型大小的计算包含了嵌入层（embedding）的大小。
 
 |      Models      | Model Size | # Train Tokens | Context Length | MATH 500 | GSM 8K | Human Eval | MBPP   | RACE Middle | RACE High | RULER  |
 |:----------------|----------:|--------------:|--------------:|:--------|:------|:----------|:------|:-----------|:---------|:------|
@@ -73,60 +89,259 @@ YuLan-Mini 是一个 2.4B 参数量的轻量化语言模型。仅使用 1.08T To
 
 ---
 
-# 预训练资源
+## 预训练资源 🔧
 
-为了提升研究的透明度和可复现性，我们将开源预训练相关资源：
+为了提高研究的透明度和可复现性，我们开源了相关的[预训练资源](https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain)：
 
+### 预训练
 
-<details><summary>1. 预训练和评测代码</summary>
+<details><summary>1. 预训练和评估代码</summary>
 
-预训练和评测代码将在后续公布。
+预训练代码可以在[这里](https://github.com/RUC-GSAI/YuLan-Mini/tree/main/pretrain)找到。请注意，由于后续的代码修改，此代码可能无法直接运行，可能需要进行一些调整。
+
+<h4 id="step-1-modify-the-config-json-">步骤 1：修改 <code>config.json</code></h4>
+<p>由于 Hugging Face Trainer 的实现，某些参数存储在 <code>config.json</code> 文件中，无法通过 Trainer 的命令行参数进行修改。因此，您需要首先更新 <code>config.json</code> 文件中的这些参数，特别是：</p>
+<ul>
+<li><strong><code>save_steps</code></strong>：保存中间检查点的频率。</li>
+<li><strong><code>train_batch_size</code></strong>：每个 GPU 的批大小（相当于 Trainer 中的 <code>per_device_train_batch_size</code>）。在稳定训练阶段，我们使用了 1008 的批大小（大约 4M 个 token）。保持相同的批大小对于训练效果同样重要。</li>
+</ul>
+<p>以下是一个正确配置的 <code>config.json</code> 文件示例：</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"best_metric"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"best_model_checkpoint"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"epoch"</span>: <span class="hljs-number">0.0</span>,
+  <span class="hljs-attr">"eval_steps"</span>: <span class="hljs-number">500</span>,
+  <span class="hljs-attr">"global_step"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"is_hyper_param_search"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"is_local_process_zero"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"is_world_process_zero"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"log_history"</span>: [],
+  <span class="hljs-attr">"logging_steps"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"max_steps"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"num_input_tokens_seen"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"num_train_epochs"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"save_steps"</span>: <span class="hljs-number">250</span>,
+  <span class="hljs-attr">"stateful_callbacks"</span>: {
+    <span class="hljs-attr">"TrainerControl"</span>: {
+      <span class="hljs-attr">"args"</span>: {
+        <span class="hljs-attr">"should_epoch_stop"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_evaluate"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_log"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"should_save"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"should_training_stop"</span>: <span class="hljs-literal">true</span>
+      },
+      <span class="hljs-attr">"attributes"</span>: {}
+    }
+  },
+  <span class="hljs-attr">"total_flos"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"train_batch_size"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"trial_name"</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">"trial_params"</span>: <span class="hljs-literal">null</span>
+}
+</code></pre>
+<h4 id="step-2-enable-universal-checkpointing-in-the-deepspeed-configuration">步骤 2：在 DeepSpeed 配置中启用通用检查点</h4>
+<p>为了确保 DeepSpeed 集成加载通用检查点，您需要在 DeepSpeed 配置 JSON 文件中启用此功能。</p>
+<p>以下是一个启用了通用检查点的 ZeRO2 配置示例：</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"bf16"</span>: {
+    <span class="hljs-attr">"enabled"</span>: <span class="hljs-string">"auto"</span>
+  },
+  <span class="hljs-attr">"zero_optimization"</span>: {
+    <span class="hljs-attr">"stage"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">"allgather_partitions"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"allgather_bucket_size"</span>: <span class="hljs-number">8e8</span>,
+    <span class="hljs-attr">"overlap_comm"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"reduce_scatter"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"reduce_bucket_size"</span>: <span class="hljs-number">8e8</span>,
+    <span class="hljs-attr">"contiguous_gradients"</span>: <span class="hljs-literal">true</span>
+  },
+  <span class="hljs-attr">"gradient_accumulation_steps"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"gradient_clipping"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"steps_per_print"</span>: <span class="hljs-number">16</span>,
+  <span class="hljs-attr">"train_batch_size"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"train_micro_batch_size_per_gpu"</span>: <span class="hljs-string">"auto"</span>,
+  <span class="hljs-attr">"wall_clock_breakdown"</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">"dump_state"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"optimizer"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"AdamW"</span>,
+    <span class="hljs-attr">"params"</span>: {
+      <span class="hljs-attr">"lr"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"betas"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"eps"</span>: <span class="hljs-string">"auto"</span>,
+      <span class="hljs-attr">"weight_decay"</span>: <span class="hljs-string">"auto"</span>
+    }
+  },
+  <span class="hljs-attr">"checkpoint"</span>: {
+    <span class="hljs-attr">"load_universal"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<h4 id="step-3-resume-training">步骤 3：恢复训练</h4>
+<p>调用 <code>trainer.train</code> 时，包含 <code>resume_from_checkpoint</code> 参数以从通用检查点加载分布式优化器状态并恢复训练。</p>
+<pre><code class="lang-python"><span class="hljs-attr">trainer.train(resume_from_checkpoint</span>=<span class="hljs-string">training_args.resume_from_checkpoint)</span>
+</code></pre>
+<p>我们提供了一个内部<a href="https://github.com/RUC-GSAI/YuLan-Mini/tree/main/pretrain">训练框架</a>供您参考，但您可以自由选择其他框架。</p>
+
 </details>
 
 <details><summary>2. 中间阶段检查点</summary>
+中间阶段检查点发布在 <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini</a> 中。
 
-中间阶段的检查点发布在 <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini</a>。
+<table>
+    <thead>
+        <tr>
+            <th>阶段</th>
+            <th>课程阶段</th>
+            <th>4K 上下文</th>
+            <th>28K 上下文</th>
+            <th>优化器</th>
+            <th>推理架构</th>
+            <th>LAMBADA <code>Acc</code></th>
+            <th>GSM8K <code>Acc</code></th>
+            <th>HumanEval <code>pass@1</code></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>稳定</td>
+            <td>5</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase5">YuLan-Mini-Phase5</a></td>
+            <td></td>
+            <td></td>
+            <td><code>yulanmini</code></td>
+            <td>53.85</td>
+            <td>3.41</td>
+            <td>12.26</td>
+        </tr>
+        <tr>
+            <td>稳定</td>
+            <td>10</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase10">YuLan-Mini-Phase10</a></td>
+            <td></td>
+            <td></td>
+            <td><code>yulanmini</code></td>
+            <td>55.00</td>
+            <td>9.57</td>
+            <td>15.95</td>
+        </tr>
+        <tr>
+            <td>稳定</td>
+            <td>15</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase15">YuLan-Mini-Phase15</a></td>
+            <td></td>
+            <td></td>
+            <td><code>yulanmini</code></td>
+            <td>55.81</td>
+            <td>13.81</td>
+            <td>16.99</td>
+        </tr>
+        <tr>
+            <td>稳定</td>
+            <td>20</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Phase20">YuLan-Mini-Phase20</a></td>
+            <td></td>
+            <td>✅</td>
+            <td><code>yulanmini</code></td>
+            <td>55.81</td>
+            <td>21.39</td>
+            <td>20.79</td>
+        </tr>
+        <tr>
+            <td>稳定</td>
+            <td>25 (1T tokens)</td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">YuLan-Mini-Before-Annealing</a></td>
+            <td></td>
+            <td>✅</td>
+            <td><code>yulanmini</code></td>
+            <td>55.67</td>
+            <td>29.94</td>
+            <td>34.06</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>退火</td>
+            <td>26</td>
+            <td>YuLan-Mini-4K</td>
+            <td></td>
+            <td></td>
+            <td><code>llama</code>*</td>
+            <td>64.72</td>
+            <td>66.65</td>
+            <td>61.60</td>
+        </tr>
+        <tr>
+            <td>退火</td>
+            <td>27</td>
+            <td></td>
+            <td><a href="https://huggingface.co/yulan-team/YuLan-Mini">YuLan-Mini</a></td>
+            <td></td>
+            <td><code>llama</code>*</td>
+            <td>65.67</td>
+            <td>68.46</td>
+            <td>64.00</td>
+        </tr>
+    </tbody>
+</table>
+
+\*：为了更容易推理和部署，我们将重新参数化的附加参数和缩放因子合并到最终发布的模型中 ([**YuLan-Mini**](https://huggingface.co/yulan-team/YuLan-Mini) 和 **YuLan-Mini-Intermediate-4K**)，使其能够在 Llama 架构上运行。但是，这些参数仍然保留在训练过程的中间检查点中。
+
 </details>
 
+<details><summary>3. 退火前的优化器状态</summary>
 
-<details><summary>3. 退火前优化器状态</summary>
-
-退火前优化器状态将在后续公布。
+<a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">🤗 YuLan-Mini-Before-Annealing</a>
 </details>
+
+### 数据集
+
 
 <details><summary>4. 使用的开源数据集</summary>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets">使用的开源数据集</a>
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets">使用的开源数据集列表</a>
 
 </details>
 
-<details><summary>5. 逐阶段的数据配比</summary>
+<details><summary>5. 每个阶段的数据分布</summary>
 
+⬇️ 点击查看更多详情：
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">
+  <div align=center>
+    <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
+  </div>
+</a>
 
-<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">数据配比高清图</a>
-<div align=center>
-<img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
-</div>
 </details>
-
 
 <details><summary>6. 合成数据</summary>
 
-数据清洗和合成流程：
+<a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/preprocess">数据清洗</a> 和 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/synthesis">合成</a> 流程：
+
 <div align=center>
 <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data-pipeline.png">
 </div>
 
-我们所使用的合成数据发布在 <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">YuLan-Mini-Datasets</a>
+我们使用的合成数据发布在 <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">🤗 YuLan-Mini-Datasets</a>
 
 </details>
-<details><summary>7. 中间阶段优化器状态</summary>
-
-中间阶段优化器状态将在后续公布。
-</details>
 
 
+### 您可以使用这些预训练资源做什么
 
+1. **预训练**您自己的 LLM。您可以使用[我们的数据](https://huggingface.co/yulan-team/YuLan-Mini-Datasets)和课程来训练一个与 YuLan-Mini 一样强大的模型。
+2. 执行您自己的**学习率退火**。在退火阶段，YuLan-Mini 的学习能力达到顶峰。您可以从[退火前的检查点](https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing)恢复训练，并使用您自己的数据集进行学习率退火。
+3. **微调** LLM 的 Instruct 版本。您可以使用 [YuLan-Mini](https://huggingface.co/yulan-team/YuLan-Mini) 基础模型来训练您自己的 Instruct 版本。
+4. **训练动态**研究。您可以使用 YuLan-Mini 的[中间检查点](https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3)来探索预训练过程中的内部变化。
+5. **合成**您自己的数据。您可以使用 YuLan-Mini 的[数据流程](https://github.com/RUC-GSAI/YuLan-Mini)来清理和生成您自己的数据集。
 ---
 
 ## 快速开始 💻
@@ -138,26 +353,47 @@ YuLan-Mini 是一个 2.4B 参数量的轻量化语言模型。仅使用 1.08T To
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-# 加载模型和分词器
-tokenizer = AutoTokenizer.from_pretrained("yulan-team/YuLan-Mini")
-model = AutoModelForCausalLM.from_pretrained("yulan-team/YuLan-Mini", torch_dtype=torch.bfloat16)
+# Load model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained("yulan-team/YuLan-Mini-Instruct-V1")
+model = AutoModelForCausalLM.from_pretrained("yulan-team/YuLan-Mini-Instruct-V1", torch_dtype=torch.bfloat16)
 
-# 输入文本
-input_text = "Renmin University of China is"
-inputs = tokenizer(input_text, return_tensors="pt")
+# Input text
+chat = [
+    {"role": "system", "content": "You are YuLan-Mini, created by RUC AI Box. You are a helpful assistant."},
+    {"role": "user", "content": "What is Renmin University of China?"}
+]
+formatted_chat = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
+inputs = tokenizer(formatted_chat, return_tensors="pt", add_special_tokens=False)
 
-# 推理
-output = model.generate(inputs["input_ids"], max_new_tokens=100)
-print(tokenizer.decode(output[0], skip_special_tokens=True))
+# Completion
+output = model.generate(inputs["input_ids"], max_new_tokens=100, temperature=0.5)
+print(tokenizer.decode(output[0][inputs['input_ids'].size(1):], skip_special_tokens=True))
 ```
 
+**vLLM部署示例**
+```bash
+vllm serve yulan-team/YuLan-Mini-Instruct-V1 --dtype bfloat16
+```
+
+**SGLang部署示例**
+```bash
+python -m sglang.launch_server --model-path yulan-team/YuLan-Mini-Instruct-V1 --port 30000 --host 0.0.0.0
+```
+
+**Ollama部署示例**
+```bash
+ollama run hf.co/mradermacher/YuLan-Mini-Instruct-V1-GGUF:IQ4_XS
+```
 
 ---
+
+## 贡献
+
+我们欢迎任何形式的贡献，包括模型错误案例的反馈、功能建议和示例贡献。您可以通过提交[issue](https://github.com/RUC-GSAI/YuLan-Mini/issues)来贡献。
 
 ## 许可协议
 
 - 本仓库代码使用 [MIT License](./LICENSE)。
-- 关于模型权重、中间优化器状态和训练数据的使用政策将在后续公布。
 - 局限性：尽管我们尝试减少模型在使用中可能出现的安全性问题，并鼓励模型生成符合道德和法律要求的文本，但由于语言模型基于概率生成的范式，模型仍然可能会产生意外的输出。例如，生成的响应可能包含偏见、歧视或其他有害内容。请不要传播此类内容。我们对因传播有害信息而造成的任何后果不承担任何责任。
 
 ## 引用
@@ -165,26 +401,11 @@ print(tokenizer.decode(output[0], skip_special_tokens=True))
 如果您发现 YuLan-Mini 对您的研究或开发有帮助，请引用我们的[技术报告](https://arxiv.org/abs/2412.17743)：
 
 ```BibTex
-@article{yulanmini,
-      title        = {YuLan-Mini: An Open Data-efficient Language Model},
-      author       = {Yiwen Hu and
-                      Huatong Song and
-                      Jia Deng and
-                      Jiapeng Wang and
-                      Jie Chen and
-                      Kun Zhou and
-                      Yutao Zhu and
-                      Jinhao Jiang and
-                      Zican Dong and
-                      Wayne Xin Zhao and
-                      Ji-Rong Wen},
-      url          = {https://arxiv.org/abs/2412.17743},
-      journal      = {CoRR},
-      volume       = {abs/2412.17743},
-      year         = {2024},
-      url          = {https://doi.org/10.48550/arXiv.2412.17743},
-      doi          = {10.48550/ARXIV.2412.17743},
-      eprinttype   = {arXiv},
-      eprint       = {2412.17743}
+@article{hu2024yulan,
+  title={YuLan-Mini: An Open Data-efficient Language Model},
+  author={Hu, Yiwen and Song, Huatong and Deng, Jia and Wang, Jiapeng and Chen, Jie and Zhou, Kun and Zhu, Yutao and Jiang, Jinhao and Dong, Zican and Zhao, Wayne Xin and others},
+  journal={arXiv preprint arXiv:2412.17743},
+  year={2024}
+}
 }
 ```
