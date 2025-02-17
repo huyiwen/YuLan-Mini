@@ -31,7 +31,7 @@ YuLan-Mini 是一个 2.4B 参数量的轻量化语言模型。仅使用 1.08T To
 | YuLan-Mini | 28K | ❎ | [`Base`](https://huggingface.co/yulan-team/YuLan-Mini) | [`Base`](https://modelscope.cn/models/yulan-team/YuLan-Mini) | [`Base`](https://wisemodel.cn/models/yulan-team/YuLan-Mini) |
 | YuLan-Mini-Instruct | 28K | ✅ | [`Instruct-V1`](https://huggingface.co/yulan-team/YuLan-Mini-Instruct-V1) | | |
 
-> 中间检查点可以在[这里](https://github.com/RUC-GSAI/YuLan-Mini#pre-training-resources-)找到。
+> 中间检查点可以在[这里](#%E9%A2%84%E8%AE%AD%E7%BB%83%E8%B5%84%E6%BA%90-)找到。
 
 ---
 
