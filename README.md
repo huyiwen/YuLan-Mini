@@ -315,6 +315,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 <details><summary>5. Data Distribution for every phase</summary>
 
+⬇️ Click for more details:
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">
   <div align=center>
     <img src="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/assets/data_distribution_for_every_phase.png">
