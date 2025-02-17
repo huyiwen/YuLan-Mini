@@ -407,5 +407,4 @@ ollama run hf.co/mradermacher/YuLan-Mini-Instruct-V1-GGUF:IQ4_XS
   journal={arXiv preprint arXiv:2412.17743},
   year={2024}
 }
-}
 ```
