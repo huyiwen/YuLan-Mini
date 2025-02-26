@@ -55,7 +55,7 @@ Our pre-training methodology improves training efficiency through three key inno
 |-------------------------|-------|-------|-------|---------------|------|------|-------------|--------|
 | Qwen-2.5-1.5B-Instruct  | 57.5  | 65.4  | 73.2  | 47.8          | 29.8 | 55.2 | 61.6        | 88.1   |
 | Llama3.2-3B-Instruct    | 60    | 45.9  | 43.4  | 78.6          | 38.6 | 48   | 51.5        | 80.4   |
-| YuLan-Mini-Instruct  | 53.6  | 50.45    | 82.3  | 51.8          | 30.1 | 55.2 | 67.7        | 85.7   |
+| YuLan-Mini-Instruct  | 53.6  | 50.5    | 82.3  | 51.8          | 30.1 | 55.2 | 67.7        | 85.7   |
 
 
 > Note: The model size calculation includes the embedding size.
