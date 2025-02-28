@@ -305,16 +305,24 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 <a href="https://huggingface.co/yulan-team/YuLan-Mini-Before-Annealing">🤗 YuLan-Mini-Before-Annealing</a>
 </details>
 
+<details><summary>4. Logs of Ablation Studies</summary>
+
+We provide W&B logs, including the intermediate hidden states and weights of each module, for ablation studies:
+
+<a href="https://wandb.ai/yiwen_hu/YuLan-Mini?nw=dld21gv708t"><img alt="W&B Logs" src="https://img.shields.io/badge/Weights_&_Biases-FFCC33?style=for-the-badge&logo=WeightsAndBiases&logoColor=black"></a>
+</details>
+
+
 ### Datasets
 
 
-<details><summary>4. The Used Open-Source Datasets </summary>
+<details><summary>5. The Used Open-Source Datasets </summary>
 
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets">Used-Datasets-List</a>
 
 </details>
 
-<details><summary>5. Data Distribution for every phase</summary>
+<details><summary>6. Data Distribution for every phase</summary>
 
 ⬇️ Click for more details:
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/datasets/final.pdf">
@@ -325,7 +333,7 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 
 </details>
 
-<details><summary>6. Synthetic Data</summary>
+<details><summary>7. Synthetic Data</summary>
 
 <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/preprocess">Data cleaning</a> and <a href="https://github.com/RUC-GSAI/YuLan-Mini/blob/main/pretrain/synthesis">synthesis</a> pipeline:
 
@@ -407,17 +415,8 @@ YuLan-Mini is developed and maintained by [AI Box, Renmin University of China](h
 
 ## Citation
 
-If you find YuLan-Mini helpful for your research or development, please cite [our technical report](https://arxiv.org/abs/2412.17743):
+If you find YuLan-Mini helpful for your research or development, please cite [our technical report](https://arxiv.org/abs/2412.17743) and blog:
 
-```
-@article{YuLan-Mini-Instruct,
-  title={YuLan-Mini-Instruct Technical Report
-},
-  author={RUCAIBox YuLan-Mini-Instruct Team},
-  url={https://github.com/RUC-GSAI/YuLan-Mini},
-  year={2025}
-}
-```
 
 ```
 @article{hu2024yulan,
@@ -425,6 +424,13 @@ If you find YuLan-Mini helpful for your research or development, please cite [ou
   author={Hu, Yiwen and Song, Huatong and Deng, Jia and Wang, Jiapeng and Chen, Jie and Zhou, Kun and Zhu, Yutao and Jiang, Jinhao and Dong, Zican and Zhao, Wayne Xin and others},
   journal={arXiv preprint arXiv:2412.17743},
   year={2024}
+}
+
+@article{YuLan-Mini-Instruct,
+  title={YuLan-Mini-Instruct Technical Report},
+  author={RUCAIBox YuLan-Mini-Instruct Team},
+  url={https://github.com/RUC-GSAI/YuLan-Mini},
+  year={2025}
 }
 ```
 
