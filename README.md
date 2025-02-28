@@ -19,6 +19,8 @@ YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achie
 ---
 
 ## News
+
+- [2025.02.28] YuLan-Mini-Instruct released
 - [2025.01.29] YuLan-Mini-Instruct-v1 released
 - [2024.12.23] YuLan-Mini & pre-training resources released
 
@@ -408,6 +410,16 @@ YuLan-Mini is developed and maintained by [AI Box, Renmin University of China](h
 If you find YuLan-Mini helpful for your research or development, please cite [our technical report](https://arxiv.org/abs/2412.17743):
 
 ```
+@article{YuLan-Mini-Instruct,
+  title={YuLan-Mini-Instruct Technical Report
+},
+  author={RUCAIBox YuLan-Mini-Instruct Team},
+  url={https://github.com/RUC-GSAI/YuLan-Mini},
+  year={2025}
+}
+```
+
+```
 @article{hu2024yulan,
   title={YuLan-Mini: An Open Data-efficient Language Model},
   author={Hu, Yiwen and Song, Huatong and Deng, Jia and Wang, Jiapeng and Chen, Jie and Zhou, Kun and Zhu, Yutao and Jiang, Jinhao and Dong, Zican and Zhao, Wayne Xin and others},
@@ -415,3 +427,5 @@ If you find YuLan-Mini helpful for your research or development, please cite [ou
   year={2024}
 }
 ```
+
+
