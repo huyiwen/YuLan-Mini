@@ -77,7 +77,7 @@ The mere aggregation of diverse data types during the SFT phase may lead to data
 
 ### Recipe
 #### Training Settings
-The model training is conducted on a distributed computing infrastructure comprising four nodes, each equipped with eight NVIDIA H800 GPUs interconnected through a high-speed network. We used an effective batch size of 512 and a maximum sequence length of 28K tokens. The optimization process is carried out over 2 epochs with a learning rate of 1e-5.
+The model training is conducted on a distributed computing infrastructure comprising four nodes, each equipped with eight NVIDIA A800 GPUs interconnected through a high-speed network. We used an effective batch size of 512 and a maximum sequence length of 28K tokens. The optimization process is carried out over 2 epochs with a learning rate of 1e-5.
 
 ## 4. Preference Finetuning
 
@@ -118,7 +118,7 @@ Considering the relatively small size of our model's parameters and the substant
 
 ### Training Recipe
 
-The training process is conducted utilizing 8xH800 GPUs for four epochs. We employ the training on the OpenRLHF framework, which provides a flexible environment for reinforcement learning tasks. During the training phase, we encounter several technical challenges, such as reward hacking phenomena that manifested as training instability and output length collapse. To address these issues, we implement a series of mitigation strategies:
+The training process is conducted utilizing 8xA800 GPUs for four epochs. We employ the training on the OpenRLHF framework, which provides a flexible environment for reinforcement learning tasks. During the training phase, we encounter several technical challenges, such as reward hacking phenomena that manifested as training instability and output length collapse. To address these issues, we implement a series of mitigation strategies:
 
 - **Critic Model Initialization and Actor Parameter Freezing.** The critic model is initialized from the reward model. Additionally, the actor model's parameters are maintained in a fixed state during the initial 15 training steps, allowing the critic model to accurately assess value estimates.
 - **Adaptive KL Controller.** We adopted an Adaptive KL Controller that dynamically adjusts the KL coefficient (beta) based on the KL divergence target, balancing exploration and exploitation during training.
@@ -221,8 +221,7 @@ Please kindly cite our reports if they are helpful for your research.
 
 ```
 @article{YuLan-Mini-Instruct,
-  title={YuLan-Mini-Instruct Technical Report
-},
+  title={YuLan-Mini-Instruct Technical Report},
   author={RUCAIBox YuLan-Mini-Instruct Team},
   url={https://github.com/RUC-GSAI/YuLan-Mini},
   year={2025}
