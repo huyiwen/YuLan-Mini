@@ -189,13 +189,13 @@ We evaluate code generation capabilities across four established benchmarks: Hum
 
 | **Benchmarks**                 | **YuLan-Mini-Instruct** | **Llama3.2-3B-Instruct** | **Qwen-2.5-1.5B-Instruct** |
 | ------------------------------ | ----------------------- | ------------------------ | -------------------------- |
-| MMLU<sub> (0 shot, CoT)</sub>  | 53.56                   | **60**                   | 57.4                       |
-| MMLU<sub> (5 shot)</sub>       | 52.71                   | 63.4                     | **66.5**                   |
-| TruthfulQA<sub>(0 shot)</sub>  | 50.08                   | 49.7                     | **58.8**                   |
-| ARC<sub>(0 shot)</sub>         | 51.79                   | **78.6**                 | 47.8                       |
-| MATH<sub>(0 shot, CoT)</sub>   | 55.18                   | 48                       | **55.2**                   |
+| MMLU<sub> (0 shot, CoT)</sub>  | 53.6                   | **60**                   | 57.4                       |
+| MMLU<sub> (5 shot)</sub>       | 52.7                   | 63.4                     | **66.5**                   |
+| TruthfulQA<sub>(0 shot)</sub>  | 50.1                   | 49.7                     | **58.8**                   |
+| ARC<sub>(0 shot)</sub>         | 51.8                   | **78.6**                 | 47.8                       |
+| MATH<sub>(0 shot, CoT)</sub>   | 55.2                   | 48                       | **55.2**                   |
 | GSM8K<sub>(8 shot)</sub>       | **81.8**                | 43.4                     | 73.2                       |
-| GSM8K<sub>(0 shot, CoT)</sub>  | **71.72**               | 66                       | 69.4                       |
+| GSM8K<sub>(0 shot, CoT)</sub>  | **71.7**               | 66                       | 69.4                       |
 | HumanEval<sub>(pass@10)</sub>  | **86.6**                | 78.7                     | 84.1                       |
 | HumanEval+<sub>(pass@10)</sub> | **80.5**                | 72                       | 78.0                       |
 | MBPP<sub>(pass@10)</sub>       | 85.7                    | 80.4                     | **88.1**                   |
