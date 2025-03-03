@@ -31,19 +31,21 @@ We store the data before tokenization and after tokenization in two different fo
 │   │   │   ├── file-2.jsonl
 │   │   │   └── ...
 │   │   ├── dataset-2
-│   │   │   ├── file-1.parquet
+│   │   │   └── file-1.parquet
 │   │   └── ...
 │   ├── dataset-3
 │   └── dataset-collection-2
 │       ├── dataset-4
+│       │   └── file-1.jsonl
 │       └── ...
 └── input_ids
     └── dataset-collection-2
         ├── dataset-4
-        │   └── wo_ppl
-        │       ├── splitted_part-0001.parquet
-        │       ├── splitted_part-0001-metadata.json
-        │       └── ...
+        │   └── file-1
+        │       └── wo_ppl
+        │           ├── splitted_part-0001.parquet
+        │           ├── splitted_part-0001-metadata.json
+        │           └── ...
         └── ...
 ```
 
