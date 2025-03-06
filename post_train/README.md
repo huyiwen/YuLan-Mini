@@ -223,7 +223,15 @@ We propose YuLan-Mini-Instruct, a powerful small-scale language model with 2.4 b
 
 ### YuLan-Mini-Instruct Team 
 
-Authors are listed in alphabetical order: Fei Bai, Zhipeng Chen, Yanzipeng Gao, Yukai Gu, Yiwen Hu, Yihong Liu, Yingqian Min, Ruiyang Ren, Huatong Song, Shuang Sun, Ji-Rong Wen, Chenghao Wu, Xin Zhao, Kun Zhou, Yutao Zhu
+Authors are listed in alphabetical order.
+
+**Core Contributors**:
+
+ Fei Bai, Yanzipeng Gao, Yukai Gu, Yihong Liu, Shuang Sun, Chenghao Wu
+
+**Contributors**:
+
+Zhipeng Chen,  Yiwen Hu,  Yingqian Min, Ruiyang Ren, Huatong Song,  Ji-Rong Wen,  Xin Zhao, Kun Zhou, Yutao Zhu
 
 ## Reference
 
