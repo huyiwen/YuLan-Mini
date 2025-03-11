@@ -14,7 +14,7 @@
 <a><img src="https://img.shields.io/github/stars/RUC-GSAI/YuLan-Mini"></a>
 </div>
 
-YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achieves performance comparable to industry-leading models trained on significantly more data, despite being pre-trained on only 1.08T tokens. The model excels particularly in the domains of **mathematics** and **code**. To facilitate reproducibility, we open-source the relevant [pre-training resources](https://github.com/RUC-GSAI/YuLan-Mini#pre-training-resources-).
+YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achieves performance comparable to industry-leading models trained on significantly more data, despite being pre-trained on only 1.08T tokens. The model excels particularly in the domains of **mathematics** and **code**. To facilitate reproducibility, we open-source the relevant [pre-training resources](https://github.com/RUC-GSAI/YuLan-Mini#pre-training-resources-) and [post-training technical report](https://github.com/RUC-GSAI/YuLan-Mini/tree/main/post_train).
 
 ---
 
