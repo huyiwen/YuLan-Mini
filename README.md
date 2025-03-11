@@ -20,6 +20,7 @@ YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achie
 
 ## News
 
+- [2025.03.07] W&B Logs for ablation studies released
 - [2025.02.28] [YuLan-Mini-Instruct](/post_train) released
 - [2025.01.29] YuLan-Mini-Instruct-v1 released
 - [2024.12.23] YuLan-Mini & pre-training resources released
@@ -310,6 +311,15 @@ The intermediate stage checkpoints are released in <a href="https://huggingface.
 We provide W&B logs, including the intermediate hidden states and weights of each module, for ablation studies:
 
 <a href="https://wandb.ai/yiwen_hu/YuLan-Mini?nw=dld21gv708t"><img alt="W&B Logs" src="https://img.shields.io/badge/Weights_&_Biases-FFCC33?style=for-the-badge&logo=WeightsAndBiases&logoColor=black"></a>
+
+<ul>
+    <li>WeSaR Re-Param</li>
+    <li>Cerebras muP</li>
+    <li>Embedding LayerNorm</li>
+    <li>Tie Embedding</li>
+    <li>QK LayerNorm</li>
+    <li>Weight Decay</li>
+</ul>
 </details>
 
 
