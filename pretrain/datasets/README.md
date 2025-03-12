@@ -63,6 +63,7 @@ This section provides links to the datasets used.
 
 | Dataset      | Link                        |
 |----------------|---------------------------------|
+YuLan-Mini-Datasets | [https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets](https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets)
 chinese-fineweb-edu | [https://huggingface.co/datasets/opencsg/chinese-fineweb-edu](https://huggingface.co/datasets/opencsg/chinese-fineweb-edu)
 baidu-baike | [https://huggingface.co/datasets/TMZN/baidubaike](https://huggingface.co/datasets/TMZN/baidubaike)
 wikipeida-cn | [https://huggingface.co/datasets/TigerResearch/pretrain-zh](https://huggingface.co/datasets/TigerResearch/pretrain-zh)
