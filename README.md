@@ -354,6 +354,8 @@ We provide W&B logs, including the intermediate hidden states and weights of eac
 
 The synthetic data we are using is released in <a href="https://huggingface.co/collections/yulan-team/yulan-mini-676d214b24376739b00d95f3">🤗 YuLan-Mini-Datasets</a>
 
+Classifiers: <a href="https://huggingface.co/collections/yulan-team/yulan-mini-resources-67b29e0086256b72099b7add">🤗 Yulan-Mini Resources</a>
+
 </details>
 
 
