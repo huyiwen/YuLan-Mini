@@ -20,6 +20,7 @@ YuLan-Mini is a lightweight language model with 2.4 billion parameters. It achie
 
 ## News
 
+- [2025.03.16] Math, code, & reasoninig classifiers released
 - [2025.03.07] W&B Logs for ablation studies released
 - [2025.02.28] [YuLan-Mini-Instruct](/post_train) released
 - [2025.01.29] YuLan-Mini-Instruct-v1 released
