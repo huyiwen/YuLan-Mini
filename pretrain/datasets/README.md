@@ -63,7 +63,10 @@ This section provides links to the datasets used.
 
 | Dataset      | Link                        |
 |----------------|---------------------------------|
-YuLan-Mini-Datasets | [https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets](https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets)
+YuLan-Mini-Datasets: | [https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets](https://huggingface.co/datasets/yulan-team/YuLan-Mini-Datasets)
+[1] Classified data using [`python-edu-scorer`](https://huggingface.co/HuggingFaceTB/python-edu-scorer) and [`fineweb-edu-classifier`](https://huggingface.co/HuggingFaceFW/fineweb-edu-classifier) |
+[2] Synthesized data (math, code, instruction, ...) |
+[3] Retrieved data using [`math`](https://huggingface.co/yulan-team/math-classifier), [`code`](https://huggingface.co/yulan-team/code-classifier), and [`reasoninig-classifier`](https://huggingface.co/yulan-team/reasoning-classifier) |
 chinese-fineweb-edu | [https://huggingface.co/datasets/opencsg/chinese-fineweb-edu](https://huggingface.co/datasets/opencsg/chinese-fineweb-edu)
 baidu-baike | [https://huggingface.co/datasets/TMZN/baidubaike](https://huggingface.co/datasets/TMZN/baidubaike)
 wikipeida-cn | [https://huggingface.co/datasets/TigerResearch/pretrain-zh](https://huggingface.co/datasets/TigerResearch/pretrain-zh)
